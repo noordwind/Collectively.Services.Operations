@@ -1,0 +1,33 @@
+﻿using Coolector.Common.Commands.Remarks;
+using Coolector.Common.Commands.Users;
+using Coolector.Common.Events.Remarks;
+using Coolector.Common.Events.Users;
+using Coolector.Common.Host;
+using Coolector.Services.Operations.Framework;
+
+namespace Coolector.Services.Operations
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            WebServiceHost
+                .Create<Startup>(port: 10010)
+                .UseAutofac(Bootstrapper.LifeTimeScope)
+                .UseRabbitMq(queueName: typeof(Program).Namespace)
+                .SubscribeToCommand<CreateRemark>()
+                .SubscribeToCommand<DeleteRemark>()
+                .SubscribeToCommand<ResolveRemark>()
+                .SubscribeToCommand<ChangeAvatar>()
+                .SubscribeToCommand<ChangeUserName>()
+                .SubscribeToCommand<EditUser>()
+                .SubscribeToEvent<RemarkCreated>()
+                .SubscribeToEvent<RemarkDeleted>()
+                .SubscribeToEvent<RemarkResolved>()
+                .SubscribeToEvent<UserNameChanged>()
+                .SubscribeToEvent<AvatarChanged>()
+                .Build()
+                .Run();
+        }
+    }
+}
