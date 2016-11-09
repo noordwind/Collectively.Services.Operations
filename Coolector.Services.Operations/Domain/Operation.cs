@@ -7,6 +7,7 @@ namespace Coolector.Services.Operations.Domain
     public class Operation : IdentifiableEntity, ITimestampable
     {
         public Guid RequestId { get; protected set; }
+        public string Name { get; protected set; }
         public string UserId { get; protected set; }
         public string Origin { get; protected set; }
         public string Resource { get; protected set; }
@@ -19,10 +20,11 @@ namespace Coolector.Services.Operations.Domain
         {
         }
 
-        public Operation(Guid requestId, string userId,
+        public Operation(Guid requestId, string name, string userId,
             string origin, string resource, DateTime createdAt,
             string message = "")
         {
+            Name = name;
             RequestId = requestId;
             UserId = userId;
             Origin = origin;

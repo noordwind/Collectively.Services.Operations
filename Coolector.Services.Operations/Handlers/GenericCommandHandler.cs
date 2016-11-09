@@ -44,9 +44,9 @@ namespace Coolector.Services.Operations.Handlers
 
         private async Task CreateAsync(IAuthenticatedCommand command)
         {
-            await _operationService.CreateAsync(command.Request.Id, command.UserId,
+            await _operationService.CreateAsync(command.Request.Id, command.Request.Name, command.UserId,
                 command.Request.Origin, command.Request.Resource, command.Request.CreatedAt);
-            await _bus.PublishAsync(new OperationCreated(command.Request.Id,
+            await _bus.PublishAsync(new OperationCreated(command.Request.Id, command.Request.Name,
                 command.UserId, command.Request.Origin, command.Request.Resource, States.Created,
                 command.Request.CreatedAt, DateTime.UtcNow, string.Empty));
         }
