@@ -12,7 +12,9 @@ namespace Coolector.Services.Operations.Handlers
 {
     public class GenericEventHandler : IEventHandler<RemarkCreated>,
         IEventHandler<RemarkResolved>, IEventHandler<RemarkDeleted>,
-        IEventHandler<AvatarChanged>, IEventHandler<UserNameChanged>
+        IEventHandler<AvatarChanged>, IEventHandler<UserNameChanged>,
+        IEventHandler<UserSignedIn>, IEventHandler<UserSignedUp>,
+        IEventHandler<UserSignedOut>, IEventHandler<UserSignInRejected>
     {
         private readonly IBusClient _bus;
         private readonly IOperationService _operationService;
@@ -24,25 +26,40 @@ namespace Coolector.Services.Operations.Handlers
         }
 
         public async Task HandleAsync(RemarkCreated @event)
-            => await CompleteAsync(@event);
+            => await CompleteForAuthenticatedUserAsync(@event);
 
         public async Task HandleAsync(RemarkResolved @event)
-            => await CompleteAsync(@event);
+            => await CompleteForAuthenticatedUserAsync(@event);
 
         public async Task HandleAsync(RemarkDeleted @event)
-            => await CompleteAsync(@event);
+            => await CompleteForAuthenticatedUserAsync(@event);
 
         public async Task HandleAsync(AvatarChanged @event)
-            => await CompleteAsync(@event);
+            => await CompleteForAuthenticatedUserAsync(@event);
 
         public async Task HandleAsync(UserNameChanged @event)
+            => await CompleteForAuthenticatedUserAsync(@event);
+
+        public async Task HandleAsync(UserSignedIn @event)
             => await CompleteAsync(@event);
 
-        private async Task CompleteAsync(IAuthenticatedEvent @event)
+        public async Task HandleAsync(UserSignedUp @event)
+            => await CompleteAsync(@event);
+
+        public async Task HandleAsync(UserSignedOut @event)
+            => await CompleteAsync(@event);
+
+        public async Task HandleAsync(UserSignInRejected @event)
+            => await RejectAsync(@event);
+
+        private async Task CompleteForAuthenticatedUserAsync(IAuthenticatedEvent @event)
+            => await CompleteAsync(@event, @event.UserId);
+
+        private async Task CompleteAsync(IEvent @event, string userId = null)
         {
             await _operationService.CompleteAsync(@event.RequestId);
             await _bus.PublishAsync(new OperationUpdated(@event.RequestId,
-                @event.UserId, States.Completed, DateTime.UtcNow, string.Empty));
+                userId, States.Completed, DateTime.UtcNow, string.Empty));
         }
 
         private async Task RejectAsync(IRejectedEvent @event)

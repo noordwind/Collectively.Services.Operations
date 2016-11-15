@@ -21,11 +21,18 @@ namespace Coolector.Services.Operations
                 .SubscribeToCommand<ChangeAvatar>()
                 .SubscribeToCommand<ChangeUserName>()
                 .SubscribeToCommand<EditUser>()
+                .SubscribeToCommand<SignIn>()
+                .SubscribeToCommand<SignUp>()
+                .SubscribeToCommand<SignOut>()
                 .SubscribeToEvent<RemarkCreated>()
                 .SubscribeToEvent<RemarkDeleted>()
                 .SubscribeToEvent<RemarkResolved>()
                 .SubscribeToEvent<UserNameChanged>()
                 .SubscribeToEvent<AvatarChanged>()
+                .SubscribeToEvent<UserSignedIn>()
+                .SubscribeToEvent<UserSignedUp>()
+                .SubscribeToEvent<UserSignedOut>()
+                .SubscribeToEvent<UserSignInRejected>()
                 .Build()
                 .Run();
         }

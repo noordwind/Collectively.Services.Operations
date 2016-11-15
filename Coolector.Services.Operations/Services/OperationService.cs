@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Coolector.Common.Types;
 using Coolector.Services.Operations.Domain;
 using Coolector.Services.Operations.Repositories;
+using Humanizer;
 
 namespace Coolector.Services.Operations.Services
 {
@@ -18,7 +19,7 @@ namespace Coolector.Services.Operations.Services
         public async Task<Maybe<Operation>> GetAsync(Guid requestId)
             => await _operationRepository.GetAsync(requestId);
 
-        public async Task CreateAsync(Guid requestId,string name,  string userId, string origin, string resource,
+        public async Task CreateAsync(Guid requestId, string name, string userId, string origin, string resource,
             DateTime createdAt)
         {
             var operation = new Operation(requestId, name, userId, origin, resource, createdAt);
