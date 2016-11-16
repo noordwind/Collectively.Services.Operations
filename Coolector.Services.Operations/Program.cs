@@ -33,6 +33,7 @@ namespace Coolector.Services.Operations
                 .SubscribeToEvent<UserSignedUp>()
                 .SubscribeToEvent<UserSignedOut>()
                 .SubscribeToEvent<UserSignInRejected>()
+                .SubscribeToEvent<UserSignUpRejected>()
                 .Build()
                 .Run();
         }

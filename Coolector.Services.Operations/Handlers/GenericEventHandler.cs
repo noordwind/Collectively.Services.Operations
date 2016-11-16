@@ -14,7 +14,8 @@ namespace Coolector.Services.Operations.Handlers
         IEventHandler<RemarkResolved>, IEventHandler<RemarkDeleted>,
         IEventHandler<AvatarChanged>, IEventHandler<UserNameChanged>,
         IEventHandler<UserSignedIn>, IEventHandler<UserSignedUp>,
-        IEventHandler<UserSignedOut>, IEventHandler<UserSignInRejected>
+        IEventHandler<UserSignedOut>, IEventHandler<UserSignInRejected>,
+        IEventHandler<UserSignUpRejected>
     {
         private readonly IBusClient _bus;
         private readonly IOperationService _operationService;
@@ -50,6 +51,9 @@ namespace Coolector.Services.Operations.Handlers
             => await CompleteAsync(@event);
 
         public async Task HandleAsync(UserSignInRejected @event)
+            => await RejectAsync(@event);
+
+        public async Task HandleAsync(UserSignUpRejected @event)
             => await RejectAsync(@event);
 
         private async Task CompleteForAuthenticatedUserAsync(IAuthenticatedEvent @event)
