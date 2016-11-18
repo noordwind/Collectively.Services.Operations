@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Coolector.Common.Events;
+using Coolector.Common.Events.Facebook;
 using Coolector.Common.Events.Operations;
 using Coolector.Common.Events.Remarks;
 using Coolector.Common.Events.Users;
@@ -15,7 +16,8 @@ namespace Coolector.Services.Operations.Handlers
         IEventHandler<AvatarChanged>, IEventHandler<UserNameChanged>,
         IEventHandler<UserSignedIn>, IEventHandler<UserSignedUp>,
         IEventHandler<UserSignedOut>, IEventHandler<UserSignInRejected>,
-        IEventHandler<UserSignUpRejected>
+        IEventHandler<UserSignUpRejected>, IEventHandler<MessageOnFacebookWallPosted>,
+        IEventHandler<PostMessageOnFacebookWallRejected>
     {
         private readonly IBusClient _bus;
         private readonly IOperationService _operationService;
@@ -50,10 +52,16 @@ namespace Coolector.Services.Operations.Handlers
         public async Task HandleAsync(UserSignedOut @event)
             => await CompleteAsync(@event);
 
+        public async Task HandleAsync(MessageOnFacebookWallPosted @event)
+            => await CompleteForAuthenticatedUserAsync(@event);
+
         public async Task HandleAsync(UserSignInRejected @event)
             => await RejectAsync(@event);
 
         public async Task HandleAsync(UserSignUpRejected @event)
+            => await RejectAsync(@event);
+
+        public async Task HandleAsync(PostMessageOnFacebookWallRejected @event)
             => await RejectAsync(@event);
 
         private async Task CompleteForAuthenticatedUserAsync(IAuthenticatedEvent @event)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Coolector.Common.Commands;
+using Coolector.Common.Commands.Facebook;
 using Coolector.Common.Commands.Remarks;
 using Coolector.Common.Commands.Users;
 using Coolector.Common.Events.Operations;
@@ -14,7 +15,8 @@ namespace Coolector.Services.Operations.Handlers
         ICommandHandler<ResolveRemark>, ICommandHandler<DeleteRemark>,
         ICommandHandler<ChangeAvatar>, ICommandHandler<ChangeUserName>,
         ICommandHandler<EditUser>, ICommandHandler<SignIn>,
-        ICommandHandler<SignUp>, ICommandHandler<SignOut>
+        ICommandHandler<SignUp>, ICommandHandler<SignOut>,
+        ICommandHandler<PostMessageOnFacebookWall>
     {
         private readonly IBusClient _bus;
         private readonly IOperationService _operationService;
@@ -50,6 +52,9 @@ namespace Coolector.Services.Operations.Handlers
             => await CreateAsync(command);
 
         public async Task HandleAsync(SignOut command)
+            => await CreateForAuthenticatedUserAsync(command);
+
+        public async Task HandleAsync(PostMessageOnFacebookWall command)
             => await CreateForAuthenticatedUserAsync(command);
 
         private async Task CreateForAuthenticatedUserAsync(IAuthenticatedCommand command)
