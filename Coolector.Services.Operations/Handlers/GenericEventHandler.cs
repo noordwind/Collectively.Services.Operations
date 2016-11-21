@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Coolector.Common;
 using Coolector.Common.Events;
 using Coolector.Common.Events.Facebook;
 using Coolector.Common.Events.Operations;
@@ -70,15 +71,15 @@ namespace Coolector.Services.Operations.Handlers
         private async Task CompleteAsync(IEvent @event, string userId = null)
         {
             await _operationService.CompleteAsync(@event.RequestId);
-            await _bus.PublishAsync(new OperationUpdated(@event.RequestId,
-                userId, States.Completed, DateTime.UtcNow, string.Empty));
+            await _bus.PublishAsync(new OperationUpdated(@event.RequestId, userId,
+                States.Completed, OperationCodes.Success, string.Empty, DateTime.UtcNow));
         }
 
         private async Task RejectAsync(IRejectedEvent @event)
         {
-            await _operationService.RejectAsync(@event.RequestId);
-            await _bus.PublishAsync(new OperationUpdated(@event.RequestId,
-                @event.UserId, States.Rejected, DateTime.UtcNow, @event.Reason));
+            await _operationService.RejectAsync(@event.RequestId, @event.Code, @event.Reason);
+            await _bus.PublishAsync(new OperationUpdated(@event.RequestId, @event.UserId,
+                States.Rejected, @event.Code, @event.Reason, DateTime.UtcNow));
         }
     }
 }

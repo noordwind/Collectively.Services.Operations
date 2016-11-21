@@ -13,16 +13,16 @@ namespace Coolector.Services.Operations.Domain
         public string Resource { get; protected set; }
         public string State { get; protected set; }
         public string Message { get; protected set; }
+        public string Code { get; protected set; }
         public DateTime CreatedAt { get; protected set; }
-        public DateTime UpdatedAt { get; protected set; }
+        public DateTime? UpdatedAt { get; protected set; }
 
         protected Operation()
         {
         }
 
         public Operation(Guid requestId, string name, string userId,
-            string origin, string resource, DateTime createdAt,
-            string message = "")
+            string origin, string resource, DateTime createdAt)
         {
             Name = name;
             RequestId = requestId;
@@ -31,28 +31,32 @@ namespace Coolector.Services.Operations.Domain
             Resource = resource;
             CreatedAt = createdAt;
             State = States.Created;
-            UpdatedAt = DateTime.UtcNow;
-            SetMessage(message);
         }
 
-        public void Complete()
+        public void Complete(string message = null)
         {
             if (State.EqualsCaseInvariant(States.Rejected))
                 throw new InvalidOperationException($"Operation: {Id} has been rejected and can not be completed.");
 
+            SetCode(Common.OperationCodes.Success);
+            SetMessage(message);
             SetState(States.Completed);
         }
 
-        public void Reject()
+        public void Reject(string code, string message)
         {
             if (State.EqualsCaseInvariant(States.Completed))
                 throw new InvalidOperationException($"Operation: {Id} has been completed and can not be rejected.");
 
+            SetCode(code);
+            SetMessage(message);
             SetState(States.Rejected);
         }
 
         public void SetMessage(string message)
         {
+            if(Message.EqualsCaseInvariant(message))
+                return;
             if (message?.Length > 500)
             {
                 throw new ArgumentException("Message can not have more than 500 characters.",
@@ -69,6 +73,15 @@ namespace Coolector.Services.Operations.Domain
                 return;
 
             State = state;
+            UpdatedAt = DateTime.UtcNow;
+        }
+
+        public void SetCode(string code)
+        {
+            if(Code.EqualsCaseInvariant(code))
+                return;
+
+            Code = code;
             UpdatedAt = DateTime.UtcNow;
         }
     }

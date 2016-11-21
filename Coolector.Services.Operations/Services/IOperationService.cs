@@ -9,7 +9,7 @@ namespace Coolector.Services.Operations.Services
     {
         Task<Maybe<Operation>> GetAsync(Guid requestId);
         Task CreateAsync(Guid requestId, string name, string userId, string origin, string resource, DateTime createdAt);
-        Task RejectAsync(Guid requestId);
-        Task CompleteAsync(Guid requestId);
+        Task RejectAsync(Guid requestId, string code, string message);
+        Task CompleteAsync(Guid requestId, string message = null);
     }
 }
