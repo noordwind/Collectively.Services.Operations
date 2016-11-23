@@ -15,6 +15,7 @@ namespace Coolector.Services.Operations.Handlers
     public class GenericEventHandler : IEventHandler<RemarkCreated>,
         IEventHandler<RemarkResolved>, IEventHandler<RemarkDeleted>,
         IEventHandler<AvatarChanged>, IEventHandler<UserNameChanged>,
+        IEventHandler<PasswordChanged>, IEventHandler<ChangePasswordRejected>,
         IEventHandler<UserSignedIn>, IEventHandler<UserSignedUp>,
         IEventHandler<UserSignedOut>, IEventHandler<UserSignInRejected>,
         IEventHandler<UserSignUpRejected>, IEventHandler<MessageOnFacebookWallPosted>,
@@ -44,6 +45,9 @@ namespace Coolector.Services.Operations.Handlers
         public async Task HandleAsync(UserNameChanged @event)
             => await CompleteForAuthenticatedUserAsync(@event);
 
+        public async Task HandleAsync(PasswordChanged @event)
+            => await CompleteForAuthenticatedUserAsync(@event);
+
         public async Task HandleAsync(UserSignedIn @event)
             => await CompleteAsync(@event);
 
@@ -55,6 +59,9 @@ namespace Coolector.Services.Operations.Handlers
 
         public async Task HandleAsync(MessageOnFacebookWallPosted @event)
             => await CompleteForAuthenticatedUserAsync(@event);
+
+        public async Task HandleAsync(ChangePasswordRejected @event)
+            => await RejectAsync(@event);
 
         public async Task HandleAsync(UserSignInRejected @event)
             => await RejectAsync(@event);
