@@ -15,6 +15,8 @@ namespace Coolector.Services.Operations.Handlers
     public class GenericEventHandler : IEventHandler<RemarkCreated>,
         IEventHandler<RemarkResolved>, IEventHandler<RemarkDeleted>,
         IEventHandler<AvatarChanged>, IEventHandler<UserNameChanged>,
+        IEventHandler<ResetPasswordInitiated>, IEventHandler<NewPasswordSet>,
+        IEventHandler<ResetPasswordRejected>, IEventHandler<SetNewPasswordRejected>,
         IEventHandler<PasswordChanged>, IEventHandler<ChangePasswordRejected>,
         IEventHandler<UserSignedIn>, IEventHandler<UserSignedUp>,
         IEventHandler<UserSignedOut>, IEventHandler<UserSignInRejected>,
@@ -44,6 +46,18 @@ namespace Coolector.Services.Operations.Handlers
 
         public async Task HandleAsync(UserNameChanged @event)
             => await CompleteForAuthenticatedUserAsync(@event);
+
+        public async Task HandleAsync(ResetPasswordInitiated @event)
+            => await CompleteAsync(@event);
+
+        public async Task HandleAsync(NewPasswordSet @event)
+            => await CompleteAsync(@event);
+
+        public async Task HandleAsync(ResetPasswordRejected @event)
+            => await RejectAsync(@event);
+
+        public async Task HandleAsync(SetNewPasswordRejected @event)
+            => await RejectAsync(@event);
 
         public async Task HandleAsync(PasswordChanged @event)
             => await CompleteForAuthenticatedUserAsync(@event);
