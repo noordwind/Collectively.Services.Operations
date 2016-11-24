@@ -19,7 +19,9 @@ namespace Coolector.Services.Operations.Handlers
         IEventHandler<UserSignedIn>, IEventHandler<UserSignedUp>,
         IEventHandler<UserSignedOut>, IEventHandler<UserSignInRejected>,
         IEventHandler<UserSignUpRejected>, IEventHandler<MessageOnFacebookWallPosted>,
-        IEventHandler<PostMessageOnFacebookWallRejected>
+        IEventHandler<PostMessageOnFacebookWallRejected>,
+        IEventHandler<CreateRemarkRejected>, IEventHandler<ResolveRemarkRejected>,
+        IEventHandler<DeleteRemarkRejected>
     {
         private readonly IBusClient _bus;
         private readonly IOperationService _operationService;
@@ -70,6 +72,15 @@ namespace Coolector.Services.Operations.Handlers
             => await RejectAsync(@event);
 
         public async Task HandleAsync(PostMessageOnFacebookWallRejected @event)
+            => await RejectAsync(@event);
+
+        public async Task HandleAsync(CreateRemarkRejected @event)
+            => await RejectAsync(@event);
+
+        public async Task HandleAsync(ResolveRemarkRejected @event)
+            => await RejectAsync(@event);
+
+        public async Task HandleAsync(DeleteRemarkRejected @event)
             => await RejectAsync(@event);
 
         private async Task CompleteForAuthenticatedUserAsync(IAuthenticatedEvent @event)
