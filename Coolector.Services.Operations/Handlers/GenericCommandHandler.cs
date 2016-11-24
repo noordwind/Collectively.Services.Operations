@@ -14,6 +14,7 @@ namespace Coolector.Services.Operations.Handlers
     public class GenericCommandHandler : ICommandHandler<CreateRemark>,
         ICommandHandler<ResolveRemark>, ICommandHandler<DeleteRemark>,
         ICommandHandler<ChangeAvatar>, ICommandHandler<ChangeUserName>,
+        ICommandHandler<ResetPassword>, ICommandHandler<SetNewPassword>,
         ICommandHandler<ChangePassword>, ICommandHandler<EditUser>,
         ICommandHandler<SignIn>, ICommandHandler<SignUp>,
         ICommandHandler<SignOut>, ICommandHandler<PostMessageOnFacebookWall>
@@ -41,6 +42,12 @@ namespace Coolector.Services.Operations.Handlers
 
         public async Task HandleAsync(ChangeUserName command)
             => await CreateForAuthenticatedUserAsync(command);
+
+        public async Task HandleAsync(ResetPassword command)
+            => await CreateAsync(command);
+
+        public async Task HandleAsync(SetNewPassword command)
+            => await CreateAsync(command);
 
         public async Task HandleAsync(ChangePassword command)
             => await CreateForAuthenticatedUserAsync(command);
