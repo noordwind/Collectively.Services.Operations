@@ -4,26 +4,27 @@
 	"buildOptions": {
 		"emitEntryPoint": true
 	},
-	"dependencies": {
-		"Microsoft.NETCore.App": {
-			"type": "platform",
-			"version": "1.*"
-		},
-		"Coolector.Common": "1.0.*",
-		"Autofac": "4.1.0",
-		"Nancy": "2.0.0-barneyrubble",
-		"NLog.Extensions.Logging": "1.0.0-*",
-		"MongoDB.Driver": "2.3.0",
-		"Microsoft.AspNetCore.Hosting": "1.1.0",
-		"Microsoft.AspNetCore.Server.Kestrel": "1.1.0",
-		"Microsoft.AspNetCore.Owin": "1.1.0",
-		"Microsoft.Extensions.Configuration.EnvironmentVariables": "1.1.0",
-		"Microsoft.Extensions.Configuration.FileExtensions": "1.1.0",
-		"Microsoft.Extensions.Configuration.Json": "1.1.0",
-		"Polly": "5.0.1-v5-0-alpha0001",
-		"RawRabbit": "1.10.0",
-		"RawRabbit.vNext": "1.10.0"
-	},
+  "dependencies": {
+    "Microsoft.NETCore.App": {
+      "type": "platform",
+      "version": "1.*"
+    },
+    "Coolector.Common": "1.0.*",
+    "Autofac": "4.1.0",
+    "AutoMapper": "5.2.0",
+    "Nancy": "2.0.0-barneyrubble",
+    "NLog.Extensions.Logging": "1.0.0-*",
+    "MongoDB.Driver": "2.3.0",
+    "Microsoft.AspNetCore.Hosting": "1.1.0",
+    "Microsoft.AspNetCore.Server.Kestrel": "1.1.0",
+    "Microsoft.AspNetCore.Owin": "1.1.0",
+    "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.1.0",
+    "Microsoft.Extensions.Configuration.FileExtensions": "1.1.0",
+    "Microsoft.Extensions.Configuration.Json": "1.1.0",
+    "Polly": "5.0.1-v5-0-alpha0001",
+    "RawRabbit": "1.10.0",
+    "RawRabbit.vNext": "1.10.0"
+  },
 	"frameworks": {
 		"netcoreapp1.1": {}
 	},

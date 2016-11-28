@@ -53,6 +53,7 @@ namespace Coolector.Services.Operations.Framework
             container.Update(builder =>
             {
                 builder.RegisterInstance(_configuration.GetSettings<MongoDbSettings>()).SingleInstance();
+                builder.RegisterInstance(AutoMapperConfig.InitializeMapper());
                 builder.RegisterModule<MongoDbModule>();
                 builder.RegisterType<MongoDbInitializer>().As<IDatabaseInitializer>();
                 var rawRabbitConfiguration = _configuration.GetSettings<RawRabbitConfiguration>();
