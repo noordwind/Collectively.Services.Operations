@@ -5,14 +5,16 @@ using System.IO;
 using Autofac;
 using Coolector.Common.Commands;
 using Coolector.Common.Events;
+using Coolector.Common.Exceptionless;
 using Coolector.Common.Mongo;
 using Coolector.Common.Nancy;
 using Coolector.Common.Extensions;
+using Coolector.Common.Services;
 using Coolector.Services.Operations.Repositories;
 using Coolector.Services.Operations.Services;
 using Microsoft.Extensions.Configuration;
+using Nancy;
 using Nancy.Bootstrapper;
-using Nancy.Configuration;
 using NLog;
 using Polly;
 using RabbitMQ.Client.Exceptions;
@@ -25,6 +27,7 @@ namespace Coolector.Services.Operations.Framework
     public class Bootstrapper : AutofacNancyBootstrapper
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        private static IExceptionHandler _exceptionHandler;
         private readonly IConfiguration _configuration;
 
         public static ILifetimeScope LifeTimeScope { get; private set; }
@@ -56,6 +59,8 @@ namespace Coolector.Services.Operations.Framework
                 builder.RegisterInstance(AutoMapperConfig.InitializeMapper());
                 builder.RegisterModule<MongoDbModule>();
                 builder.RegisterType<MongoDbInitializer>().As<IDatabaseInitializer>();
+                builder.RegisterInstance(_configuration.GetSettings<ExceptionlessSettings>()).SingleInstance();
+                builder.RegisterType<ExceptionlessExceptionHandler>().As<IExceptionHandler>().SingleInstance();
                 var rawRabbitConfiguration = _configuration.GetSettings<RawRabbitConfiguration>();
                 builder.RegisterInstance(rawRabbitConfiguration).SingleInstance();
                 rmqRetryPolicy.Execute(() => builder
@@ -71,6 +76,17 @@ namespace Coolector.Services.Operations.Framework
             LifeTimeScope = container;
         }
 
+        protected override void RequestStartup(ILifetimeScope container, IPipelines pipelines, NancyContext context)
+        {
+            pipelines.OnError.AddItemToEndOfPipeline((ctx, ex) =>
+            {
+                _exceptionHandler.Handle(ex, ctx.ToExceptionData(),
+                    "Request details", "Coolector", "Service", "Operations");
+
+                return ctx.Response;
+            });
+        }
+
         protected override void ApplicationStartup(ILifetimeScope container, IPipelines pipelines)
         {
             var databaseSettings = container.Resolve<MongoDbSettings>();
@@ -84,7 +100,8 @@ namespace Coolector.Services.Operations.Framework
                 ctx.Response.Headers.Add("Access-Control-Allow-Headers",
                     "Authorization, Origin, X-Requested-With, Content-Type, Accept");
             };
-            Logger.Info("Coolector.Services.Operations API Started");
+            _exceptionHandler = container.Resolve<IExceptionHandler>();
+            Logger.Info("Coolector.Services.Operations API has started.");
         }
     }
 }
