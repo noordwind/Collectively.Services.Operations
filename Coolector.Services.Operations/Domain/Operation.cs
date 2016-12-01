@@ -1,4 +1,5 @@
 ﻿using System;
+using Coolector.Common;
 using Coolector.Common.Domain;
 using Coolector.Common.Extensions;
 
@@ -38,7 +39,7 @@ namespace Coolector.Services.Operations.Domain
             if (State.EqualsCaseInvariant(States.Rejected))
                 throw new InvalidOperationException($"Operation: {Id} has been rejected and can not be completed.");
 
-            SetCode(Common.OperationCodes.Success);
+            SetCode(OperationCodes.Success);
             SetMessage(message);
             SetState(States.Completed);
         }
