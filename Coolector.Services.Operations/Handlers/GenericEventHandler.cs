@@ -14,13 +14,15 @@ namespace Coolector.Services.Operations.Handlers
 {
     public class GenericEventHandler : IEventHandler<RemarkCreated>,
         IEventHandler<RemarkResolved>, IEventHandler<RemarkDeleted>,
-        IEventHandler<AvatarChanged>, IEventHandler<UserNameChanged>,
+        IEventHandler<AvatarChanged>, IEventHandler<ChangeAvatarRejected>, 
+        IEventHandler<UserNameChanged>, IEventHandler<ChangeUsernameRejected>,
         IEventHandler<ResetPasswordInitiated>, IEventHandler<NewPasswordSet>,
         IEventHandler<ResetPasswordRejected>, IEventHandler<SetNewPasswordRejected>,
         IEventHandler<PasswordChanged>, IEventHandler<ChangePasswordRejected>,
         IEventHandler<UserSignedIn>, IEventHandler<UserSignedUp>,
-        IEventHandler<UserSignedOut>, IEventHandler<UserSignInRejected>,
-        IEventHandler<UserSignUpRejected>, IEventHandler<MessageOnFacebookWallPosted>,
+        IEventHandler<UserSignedOut>, IEventHandler<SignOutRejected>, 
+        IEventHandler<UserSignInRejected>, IEventHandler<UserSignUpRejected>, 
+        IEventHandler<MessageOnFacebookWallPosted>,
         IEventHandler<PostMessageOnFacebookWallRejected>,
         IEventHandler<CreateRemarkRejected>, IEventHandler<ResolveRemarkRejected>,
         IEventHandler<DeleteRemarkRejected>
@@ -46,8 +48,14 @@ namespace Coolector.Services.Operations.Handlers
         public async Task HandleAsync(AvatarChanged @event)
             => await CompleteForAuthenticatedUserAsync(@event);
 
+        public async Task HandleAsync(ChangeAvatarRejected @event)
+            => await RejectAsync(@event);
+
         public async Task HandleAsync(UserNameChanged @event)
             => await CompleteForAuthenticatedUserAsync(@event);
+
+        public async Task HandleAsync(ChangeUsernameRejected @event)
+            => await RejectAsync(@event);
 
         public async Task HandleAsync(ResetPasswordInitiated @event)
             => await CompleteAsync(@event);
@@ -72,6 +80,9 @@ namespace Coolector.Services.Operations.Handlers
 
         public async Task HandleAsync(UserSignedOut @event)
             => await CompleteAsync(@event);
+
+        public async Task HandleAsync(SignOutRejected @event)
+            => await RejectAsync(@event);
 
         public async Task HandleAsync(MessageOnFacebookWallPosted @event)
             => await CompleteForAuthenticatedUserAsync(@event);
