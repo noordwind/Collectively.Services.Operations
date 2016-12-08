@@ -10,6 +10,7 @@
       "version": "1.*"
     },
     "Coolector.Common": "1.0.*",
+    "Coolector.Services.Users.Shared": "1.0.*",
     "Lockbox.Client": "1.0.0-beta-2",
     "Exceptionless": "4.0.1922",
     "Autofac": "4.1.0",

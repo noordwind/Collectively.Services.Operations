@@ -1,12 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Coolector.Common.Commands;
 using Coolector.Common.Commands.Facebook;
 using Coolector.Common.Commands.Remarks;
-using Coolector.Common.Commands.Users;
 using Coolector.Common.Events.Operations;
 using Coolector.Services.Operations.Domain;
 using Coolector.Services.Operations.Services;
+using Coolector.Services.Users.Shared.Commands;
 using RawRabbit;
 
 namespace Coolector.Services.Operations.Handlers
