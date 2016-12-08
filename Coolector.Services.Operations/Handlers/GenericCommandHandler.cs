@@ -2,9 +2,9 @@
 using Coolector.Common.Commands;
 using Coolector.Common.Commands.Facebook;
 using Coolector.Common.Commands.Remarks;
-using Coolector.Common.Events.Operations;
 using Coolector.Services.Operations.Domain;
 using Coolector.Services.Operations.Services;
+using Coolector.Services.Operations.Shared.Events;
 using Coolector.Services.Users.Shared.Commands;
 using RawRabbit;
 

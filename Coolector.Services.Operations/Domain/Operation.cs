@@ -2,6 +2,7 @@
 using Coolector.Common;
 using Coolector.Common.Domain;
 using Coolector.Common.Extensions;
+using Coolector.Services.Operations.Shared;
 
 namespace Coolector.Services.Operations.Domain
 {
