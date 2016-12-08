@@ -36,16 +36,16 @@ git clone https://github.com/noordwind/Coolector.Docker
 
 Once executed, you shall be able to access the following services:
 
-|Name           |URL                                                |Repository 
-|---------------|---------------------------------------------------|------------------------------------------------------------------------------------------
-|API                |[http://localhost:5000](http://localhost:5000)         |[Coolector.Api](https://github.com/noordwind/Coolector.Api) 
-|Mailing            |[http://localhost:10005](http://localhost:10005)       |[Coolector.Services.Mailing](https://github.com/noordwind/Coolector.Services.Mailing) 
-|**Operations**     |**[http://localhost:10000](http://localhost:10000)**   |**[Coolector.Services.Operations](https://github.com/noordwind/Coolector.Services.Operations)**
-|Remarks            |[http://localhost:10002](http://localhost:10002)       |[Coolector.Services.Remarks](https://github.com/noordwind/Coolector.Services.Remarks) 
-|SignalR            |[http://localhost:15000](http://localhost:15000)       |[Coolector.Services.SignalR](https://github.com/noordwind/Coolector.Services.SignalR) 
-|Storage            |[http://localhost:10000](http://localhost:10000)       |[Coolector.Services.Storage](https://github.com/noordwind/Coolector.Services.Storage) 
-|Users              |[http://localhost:10001](http://localhost:10001)       |[Coolector.Services.Users](https://github.com/noordwind/Coolector.Services.Users) 
-|Web                |[http://localhost:9000](http://localhost:9000)         |[Coolector.Web](https://github.com/noordwind/Coolector.Web) 
+|Name               |URL                                                  |Repository 
+|-------------------|-----------------------------------------------------|-----------------------------------------------------------------------------------------------
+|API                |[http://localhost:5000](http://localhost:5000)       |[Coolector.Api](https://github.com/noordwind/Coolector.Api) 
+|Mailing            |[http://localhost:10005](http://localhost:10005)     |[Coolector.Services.Mailing](https://github.com/noordwind/Coolector.Services.Mailing) 
+|**Operations**     |**[http://localhost:10000](http://localhost:10000)** |**[Coolector.Services.Operations](https://github.com/noordwind/Coolector.Services.Operations)**
+|Remarks            |[http://localhost:10002](http://localhost:10002)     |[Coolector.Services.Remarks](https://github.com/noordwind/Coolector.Services.Remarks) 
+|SignalR            |[http://localhost:15000](http://localhost:15000)     |[Coolector.Services.SignalR](https://github.com/noordwind/Coolector.Services.SignalR) 
+|Storage            |[http://localhost:10000](http://localhost:10000)     |[Coolector.Services.Storage](https://github.com/noordwind/Coolector.Services.Storage) 
+|Users              |[http://localhost:10001](http://localhost:10001)     |[Coolector.Services.Users](https://github.com/noordwind/Coolector.Services.Users) 
+|Web                |[http://localhost:9000](http://localhost:9000)       |[Coolector.Web](https://github.com/noordwind/Coolector.Web) 
 
 ## Classic way
 
