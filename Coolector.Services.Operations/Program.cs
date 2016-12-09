@@ -1,9 +1,9 @@
 ﻿using Coolector.Common.Commands.Facebook;
-using Coolector.Common.Commands.Remarks;
 using Coolector.Common.Events.Facebook;
-using Coolector.Common.Events.Remarks;
 using Coolector.Common.Host;
 using Coolector.Services.Operations.Framework;
+using Coolector.Services.Remarks.Shared.Commands;
+using Coolector.Services.Remarks.Shared.Events;
 using Coolector.Services.Users.Shared.Commands;
 using Coolector.Services.Users.Shared.Events;
 
