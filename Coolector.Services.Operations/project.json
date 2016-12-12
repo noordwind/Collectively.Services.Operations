@@ -5,10 +5,6 @@
 		"emitEntryPoint": true
 	},
   "dependencies": {
-    "Microsoft.NETCore.App": {
-      "type": "platform",
-      "version": "1.*"
-    },
     "Coolector.Common": "1.0.*",
     "Coolector.Services.Operations.Shared": "1.0.*",
     "Coolector.Services.Remarks.Shared": "1.0.*",
@@ -31,8 +27,15 @@
     "RawRabbit.vNext": "1.10.0"
   },
 	"frameworks": {
-		"netcoreapp1.1": {}
-	},
+	  "netcoreapp1.1": {
+		  "dependencies": {
+			  "Microsoft.NETCore.App": {
+				  "type": "platform",
+				  "version": "1.1.0"
+			  }
+		  }
+	  }
+  },
 	"publishOptions": {
 		"include": [
 			"nlog.config",
