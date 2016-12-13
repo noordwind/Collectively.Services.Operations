@@ -5,7 +5,6 @@ using Coolector.Services.Operations.Services;
 using Coolector.Services.Operations.Shared.Events;
 using Coolector.Services.Remarks.Shared.Commands;
 using Coolector.Services.Users.Shared.Commands;
-using Coolector.Services.Users.Shared.Commands.Facebook;
 using RawRabbit;
 
 namespace Coolector.Services.Operations.Handlers
@@ -16,7 +15,7 @@ namespace Coolector.Services.Operations.Handlers
         ICommandHandler<ResetPassword>, ICommandHandler<SetNewPassword>,
         ICommandHandler<ChangePassword>, ICommandHandler<EditUser>,
         ICommandHandler<SignIn>, ICommandHandler<SignUp>,
-        ICommandHandler<SignOut>, ICommandHandler<PostMessageOnFacebookWall>
+        ICommandHandler<SignOut>, ICommandHandler<PostOnFacebookWall>
     {
         private readonly IBusClient _bus;
         private readonly IOperationService _operationService;
@@ -63,7 +62,7 @@ namespace Coolector.Services.Operations.Handlers
         public async Task HandleAsync(SignOut command)
             => await CreateForAuthenticatedUserAsync(command);
 
-        public async Task HandleAsync(PostMessageOnFacebookWall command)
+        public async Task HandleAsync(PostOnFacebookWall command)
             => await CreateForAuthenticatedUserAsync(command);
 
         private async Task CreateForAuthenticatedUserAsync(IAuthenticatedCommand command)

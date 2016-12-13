@@ -3,9 +3,7 @@ using Coolector.Services.Operations.Framework;
 using Coolector.Services.Remarks.Shared.Commands;
 using Coolector.Services.Remarks.Shared.Events;
 using Coolector.Services.Users.Shared.Commands;
-using Coolector.Services.Users.Shared.Commands.Facebook;
 using Coolector.Services.Users.Shared.Events;
-using Coolector.Services.Users.Shared.Events.Facebook;
 
 namespace Coolector.Services.Operations
 {
@@ -29,7 +27,7 @@ namespace Coolector.Services.Operations
                 .SubscribeToCommand<SignIn>()
                 .SubscribeToCommand<SignUp>()
                 .SubscribeToCommand<SignOut>()
-                .SubscribeToCommand<PostMessageOnFacebookWall>()
+                .SubscribeToCommand<PostOnFacebookWall>()
                 .SubscribeToEvent<RemarkCreated>()
                 .SubscribeToEvent<CreateRemarkRejected>()
                 .SubscribeToEvent<RemarkDeleted>()
@@ -53,7 +51,7 @@ namespace Coolector.Services.Operations
                 .SubscribeToEvent<UserSignUpRejected>()
                 .SubscribeToEvent<SignOutRejected>()
                 .SubscribeToEvent<MessageOnFacebookWallPosted>()
-                .SubscribeToEvent<PostMessageOnFacebookWallRejected>()
+                .SubscribeToEvent<PostOnFacebookWallRejected>()
                 .Build()
                 .Run();
         }

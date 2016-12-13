@@ -7,7 +7,6 @@ using Coolector.Services.Operations.Shared;
 using Coolector.Services.Operations.Shared.Events;
 using Coolector.Services.Remarks.Shared.Events;
 using Coolector.Services.Users.Shared.Events;
-using Coolector.Services.Users.Shared.Events.Facebook;
 using RawRabbit;
 
 namespace Coolector.Services.Operations.Handlers
@@ -23,7 +22,7 @@ namespace Coolector.Services.Operations.Handlers
         IEventHandler<UserSignedOut>, IEventHandler<SignOutRejected>, 
         IEventHandler<UserSignInRejected>, IEventHandler<UserSignUpRejected>, 
         IEventHandler<MessageOnFacebookWallPosted>,
-        IEventHandler<PostMessageOnFacebookWallRejected>,
+        IEventHandler<PostOnFacebookWallRejected>,
         IEventHandler<CreateRemarkRejected>, IEventHandler<ResolveRemarkRejected>,
         IEventHandler<DeleteRemarkRejected>
     {
@@ -96,7 +95,7 @@ namespace Coolector.Services.Operations.Handlers
         public async Task HandleAsync(UserSignUpRejected @event)
             => await RejectAsync(@event);
 
-        public async Task HandleAsync(PostMessageOnFacebookWallRejected @event)
+        public async Task HandleAsync(PostOnFacebookWallRejected @event)
             => await RejectAsync(@event);
 
         public async Task HandleAsync(CreateRemarkRejected @event)
