@@ -13,6 +13,7 @@ namespace Coolector.Services.Operations.Handlers
 {
     public class GenericEventHandler : IEventHandler<RemarkCreated>,
         IEventHandler<RemarkResolved>, IEventHandler<RemarkDeleted>,
+        IEventHandler<PhotosToRemarkAdded>, IEventHandler<AddPhotosToRemarkRejected>, 
         IEventHandler<AvatarChanged>, IEventHandler<ChangeAvatarRejected>, 
         IEventHandler<UserNameChanged>, IEventHandler<ChangeUsernameRejected>,
         IEventHandler<ResetPasswordInitiated>, IEventHandler<NewPasswordSet>,
@@ -43,6 +44,12 @@ namespace Coolector.Services.Operations.Handlers
 
         public async Task HandleAsync(RemarkDeleted @event)
             => await CompleteForAuthenticatedUserAsync(@event);
+
+        public async Task HandleAsync(PhotosToRemarkAdded @event)
+            => await CompleteForAuthenticatedUserAsync(@event);
+
+        public async Task HandleAsync(AddPhotosToRemarkRejected @event)
+            => await RejectAsync(@event);
 
         public async Task HandleAsync(AvatarChanged @event)
             => await CompleteForAuthenticatedUserAsync(@event);

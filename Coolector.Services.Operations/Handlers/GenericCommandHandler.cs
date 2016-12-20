@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Coolector.Common.Commands;
 using Coolector.Services.Operations.Domain;
 using Coolector.Services.Operations.Services;
@@ -11,6 +12,7 @@ namespace Coolector.Services.Operations.Handlers
 {
     public class GenericCommandHandler : ICommandHandler<CreateRemark>,
         ICommandHandler<ResolveRemark>, ICommandHandler<DeleteRemark>,
+        ICommandHandler<AddPhotosToRemark>, 
         ICommandHandler<ChangeAvatar>, ICommandHandler<ChangeUserName>,
         ICommandHandler<ResetPassword>, ICommandHandler<SetNewPassword>,
         ICommandHandler<ChangePassword>, ICommandHandler<EditUser>,
@@ -33,6 +35,9 @@ namespace Coolector.Services.Operations.Handlers
             => await CreateForAuthenticatedUserAsync(command);
 
         public async Task HandleAsync(DeleteRemark command)
+            => await CreateForAuthenticatedUserAsync(command);
+
+        public async Task HandleAsync(AddPhotosToRemark command)
             => await CreateForAuthenticatedUserAsync(command);
 
         public async Task HandleAsync(ChangeAvatar command)
