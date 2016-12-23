@@ -12,7 +12,7 @@ namespace Coolector.Services.Operations.Handlers
 {
     public class GenericCommandHandler : ICommandHandler<CreateRemark>,
         ICommandHandler<ResolveRemark>, ICommandHandler<DeleteRemark>,
-        ICommandHandler<AddPhotosToRemark>, 
+        ICommandHandler<AddPhotosToRemark>, ICommandHandler<RemovePhotosFromRemark>, 
         ICommandHandler<ChangeAvatar>, ICommandHandler<ChangeUserName>,
         ICommandHandler<ResetPassword>, ICommandHandler<SetNewPassword>,
         ICommandHandler<ChangePassword>, ICommandHandler<EditUser>,
@@ -38,6 +38,9 @@ namespace Coolector.Services.Operations.Handlers
             => await CreateForAuthenticatedUserAsync(command);
 
         public async Task HandleAsync(AddPhotosToRemark command)
+            => await CreateForAuthenticatedUserAsync(command);
+
+        public async Task HandleAsync(RemovePhotosFromRemark command)
             => await CreateForAuthenticatedUserAsync(command);
 
         public async Task HandleAsync(ChangeAvatar command)
