@@ -15,6 +15,8 @@ namespace Coolector.Services.Operations.Handlers
         IEventHandler<RemarkResolved>, IEventHandler<RemarkDeleted>,
         IEventHandler<PhotosToRemarkAdded>, IEventHandler<AddPhotosToRemarkRejected>, 
         IEventHandler<PhotosFromRemarkRemoved>, IEventHandler<RemovePhotosFromRemarkRejected>, 
+        IEventHandler<RemarkVoteSubmitted>, IEventHandler<SubmitRemarkVoteRejected>, 
+        IEventHandler<RemarkVoteDeleted>, IEventHandler<DeleteRemarkVoteRejected>, 
         IEventHandler<AvatarChanged>, IEventHandler<ChangeAvatarRejected>, 
         IEventHandler<UserNameChanged>, IEventHandler<ChangeUsernameRejected>,
         IEventHandler<ResetPasswordInitiated>, IEventHandler<NewPasswordSet>,
@@ -57,7 +59,19 @@ namespace Coolector.Services.Operations.Handlers
 
         public async Task HandleAsync(RemovePhotosFromRemarkRejected @event)
             => await RejectAsync(@event);
-            
+
+        public async Task HandleAsync(RemarkVoteSubmitted @event)
+            => await CompleteForAuthenticatedUserAsync(@event);
+
+        public async Task HandleAsync(SubmitRemarkVoteRejected @event)
+            => await RejectAsync(@event);
+
+        public async Task HandleAsync(RemarkVoteDeleted @event)
+            => await CompleteForAuthenticatedUserAsync(@event);
+
+        public async Task HandleAsync(DeleteRemarkVoteRejected @event)
+            => await RejectAsync(@event);
+
         public async Task HandleAsync(AvatarChanged @event)
             => await CompleteForAuthenticatedUserAsync(@event);
 
