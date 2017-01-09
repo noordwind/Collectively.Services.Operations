@@ -7,6 +7,7 @@ using Coolector.Services.Operations.Shared;
 using Coolector.Services.Operations.Shared.Events;
 using Coolector.Services.Remarks.Shared.Events;
 using Coolector.Services.Users.Shared.Events;
+using Humanizer;
 using RawRabbit;
 
 namespace Coolector.Services.Operations.Handlers
@@ -141,7 +142,8 @@ namespace Coolector.Services.Operations.Handlers
         private async Task CompleteAsync(IEvent @event, string userId = null)
         {
             await _operationService.CompleteAsync(@event.RequestId);
-            await _bus.PublishAsync(new OperationUpdated(@event.RequestId, userId,
+            await _bus.PublishAsync(new OperationUpdated(@event.RequestId, userId, 
+                @event.GetType().Name.Humanize(LetterCasing.LowerCase).Underscore(),
                 States.Completed, OperationCodes.Success, string.Empty, DateTime.UtcNow));
         }
 
@@ -149,6 +151,7 @@ namespace Coolector.Services.Operations.Handlers
         {
             await _operationService.RejectAsync(@event.RequestId, @event.Code, @event.Reason);
             await _bus.PublishAsync(new OperationUpdated(@event.RequestId, @event.UserId,
+                @event.GetType().Name.Humanize(LetterCasing.LowerCase).Underscore(),
                 States.Rejected, @event.Code, @event.Reason, DateTime.UtcNow));
         }
     }

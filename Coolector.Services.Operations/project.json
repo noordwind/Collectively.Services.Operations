@@ -9,6 +9,7 @@
     "Coolector.Services.Operations.Shared": "1.0.*",
     "Coolector.Services.Remarks.Shared": "1.0.*",
     "Coolector.Services.Users.Shared": "1.0.*",
+    "Humanizer.Core": "2.1.0",
     "Lockbox.Client": "1.0.0",
     "Exceptionless": "4.0.1922",
     "Autofac": "4.2.1",
