@@ -20,7 +20,7 @@ namespace Coolector.Services.Operations.Handlers
         IEventHandler<RemarkVoteSubmitted>, IEventHandler<SubmitRemarkVoteRejected>, 
         IEventHandler<RemarkVoteDeleted>, IEventHandler<DeleteRemarkVoteRejected>, 
         IEventHandler<AvatarChanged>, IEventHandler<ChangeAvatarRejected>, 
-        IEventHandler<UserNameChanged>, IEventHandler<ChangeUsernameRejected>,
+        IEventHandler<UsernameChanged>, IEventHandler<ChangeUsernameRejected>,
         IEventHandler<ResetPasswordInitiated>, IEventHandler<NewPasswordSet>,
         IEventHandler<ResetPasswordRejected>, IEventHandler<SetNewPasswordRejected>,
         IEventHandler<PasswordChanged>, IEventHandler<ChangePasswordRejected>,
@@ -81,7 +81,7 @@ namespace Coolector.Services.Operations.Handlers
         public async Task HandleAsync(ChangeAvatarRejected @event)
             => await RejectAsync(@event);
 
-        public async Task HandleAsync(UserNameChanged @event)
+        public async Task HandleAsync(UsernameChanged @event)
             => await CompleteForAuthenticatedUserAsync(@event);
 
         public async Task HandleAsync(ChangeUsernameRejected @event)
