@@ -8,6 +8,7 @@ using Coolector.Services.Operations.Shared.Events;
 using Coolector.Services.Remarks.Shared.Events;
 using Coolector.Services.Users.Shared.Events;
 using Humanizer;
+using NLog;
 using RawRabbit;
 
 namespace Coolector.Services.Operations.Handlers
@@ -31,6 +32,7 @@ namespace Coolector.Services.Operations.Handlers
         IEventHandler<CreateRemarkRejected>, IEventHandler<ResolveRemarkRejected>,
         IEventHandler<DeleteRemarkRejected>
     {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private readonly IBusClient _bus;
         private readonly IOperationService _operationService;
 
@@ -141,6 +143,7 @@ namespace Coolector.Services.Operations.Handlers
 
         private async Task CompleteAsync(IEvent @event, string userId = null)
         {
+            Logger.Debug($"Complete operation after receiving {@event.GetType().Name} event");
             await _operationService.CompleteAsync(@event.RequestId);
             await _bus.PublishAsync(new OperationUpdated(@event.RequestId, userId, 
                 @event.GetType().Name.Humanize(LetterCasing.LowerCase).Underscore(),
@@ -149,6 +152,7 @@ namespace Coolector.Services.Operations.Handlers
 
         private async Task RejectAsync(IRejectedEvent @event)
         {
+            Logger.Debug($"Reject operation after receiving {@event.GetType().Name} event");
             await _operationService.RejectAsync(@event.RequestId, @event.Code, @event.Reason);
             await _bus.PublishAsync(new OperationUpdated(@event.RequestId, @event.UserId,
                 @event.GetType().Name.Humanize(LetterCasing.LowerCase).Underscore(),

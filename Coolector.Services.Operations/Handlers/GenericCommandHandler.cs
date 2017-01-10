@@ -6,6 +6,7 @@ using Coolector.Services.Operations.Services;
 using Coolector.Services.Operations.Shared.Events;
 using Coolector.Services.Remarks.Shared.Commands;
 using Coolector.Services.Users.Shared.Commands;
+using NLog;
 using RawRabbit;
 
 namespace Coolector.Services.Operations.Handlers
@@ -20,6 +21,7 @@ namespace Coolector.Services.Operations.Handlers
         ICommandHandler<SignIn>, ICommandHandler<SignUp>,
         ICommandHandler<SignOut>, ICommandHandler<PostOnFacebookWall>
     {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private readonly IBusClient _bus;
         private readonly IOperationService _operationService;
 
@@ -85,6 +87,7 @@ namespace Coolector.Services.Operations.Handlers
 
         private async Task CreateAsync(ICommand command, string userId = null)
         {
+            Logger.Debug($"Create operation for {command.GetType().Name} command");
             await _operationService.CreateAsync(command.Request.Id, command.Request.Name, userId,
                 command.Request.Origin, command.Request.Resource, command.Request.CreatedAt);
             await _bus.PublishAsync(new OperationCreated(command.Request.Id, command.Request.Name,
