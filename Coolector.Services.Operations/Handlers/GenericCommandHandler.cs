@@ -14,7 +14,7 @@ namespace Coolector.Services.Operations.Handlers
         ICommandHandler<ResolveRemark>, ICommandHandler<DeleteRemark>,
         ICommandHandler<AddPhotosToRemark>, ICommandHandler<RemovePhotosFromRemark>, 
         ICommandHandler<SubmitRemarkVote>, ICommandHandler<DeleteRemarkVote>,
-        ICommandHandler<ChangeAvatar>, ICommandHandler<ChangeUserName>,
+        ICommandHandler<ChangeAvatar>, ICommandHandler<ChangeUsername>,
         ICommandHandler<ResetPassword>, ICommandHandler<SetNewPassword>,
         ICommandHandler<ChangePassword>, ICommandHandler<EditUser>,
         ICommandHandler<SignIn>, ICommandHandler<SignUp>,
@@ -53,7 +53,7 @@ namespace Coolector.Services.Operations.Handlers
         public async Task HandleAsync(ChangeAvatar command)
             => await CreateForAuthenticatedUserAsync(command);
 
-        public async Task HandleAsync(ChangeUserName command)
+        public async Task HandleAsync(ChangeUsername command)
             => await CreateForAuthenticatedUserAsync(command);
 
         public async Task HandleAsync(ResetPassword command)
