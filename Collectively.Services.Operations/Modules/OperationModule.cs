@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Collectively.Services.Operations.Domain;
+using Collectively.Services.Operations.Dto;
 using Collectively.Services.Operations.Queries;
 using Collectively.Services.Operations.Services;
-
 
 namespace Collectively.Services.Operations.Modules
 {

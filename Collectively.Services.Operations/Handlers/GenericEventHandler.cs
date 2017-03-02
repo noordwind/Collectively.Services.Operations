@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Collectively.Common.Events;
+using Collectively.Messages.Events;
 using Collectively.Services.Operations.Domain;
 using Collectively.Services.Operations.Services;
 using Collectively.Services.Operations.Shared;

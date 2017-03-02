@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Collectively.Services.Operations.Domain;
-
+using Collectively.Services.Operations.Dto;
 
 namespace Collectively.Services.Operations.Framework
 {
