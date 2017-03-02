@@ -6,7 +6,7 @@
 	},
   "dependencies": {
     "Collectively.Common": "1.0.*",
-    "Collectively.Messages": "1.0.*",,
+    "Collectively.Messages": "1.0.*",
     "Humanizer.Core": "2.1.0",
     "Lockbox.Client": "1.0.0",
     "Exceptionless": "4.0.1922",

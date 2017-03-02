@@ -47,7 +47,7 @@ namespace Collectively.Services.Operations.Framework
 
             container.Update(builder =>
             {
-                builder.RegisterType<CustomJsonSerializer>().As<JsonSerializer>().SingleInstance();
+                builder.RegisterType<JsonNetSerializer>().As<JsonSerializer>().SingleInstance();
                 builder.RegisterInstance(_configuration.GetSettings<MongoDbSettings>()).SingleInstance();
                 builder.RegisterInstance(AutoMapperConfig.InitializeMapper());
                 builder.RegisterModule<MongoDbModule>();

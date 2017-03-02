@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Collectively.Messages.Events;
 using Collectively.Services.Operations.Domain;
 using Collectively.Services.Operations.Services;
-using Collectively.Services.Operations.Shared;
 using Collectively.Messages.Events.Operations;
 using Collectively.Messages.Events.Remarks;
 using Collectively.Messages.Events.Users;

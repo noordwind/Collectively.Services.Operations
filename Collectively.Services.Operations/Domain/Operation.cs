@@ -1,8 +1,6 @@
 ﻿using System;
-using Collectively.Common;
 using Collectively.Common.Domain;
 using Collectively.Common.Extensions;
-using Collectively.Services.Operations.Shared;
 
 namespace Collectively.Services.Operations.Domain
 {
