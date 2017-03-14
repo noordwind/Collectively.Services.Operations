@@ -1,7 +1,4 @@
-﻿using System;
-using System.Globalization;
-using System.Reflection;
-using System.IO;
+﻿using System.Reflection;
 using Autofac;
 using Collectively.Messages.Commands;
 using Collectively.Messages.Events;
@@ -20,8 +17,6 @@ using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Autofac;
 using NLog;
-using Polly;
-using RabbitMQ.Client.Exceptions;
 using RawRabbit.Configuration;
 
 namespace Collectively.Services.Operations.Framework

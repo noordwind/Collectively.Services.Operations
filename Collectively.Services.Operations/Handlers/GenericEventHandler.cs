@@ -13,7 +13,9 @@ using RawRabbit;
 namespace Collectively.Services.Operations.Handlers
 {
     public class GenericEventHandler : IEventHandler<RemarkCreated>,
-        IEventHandler<RemarkResolved>, IEventHandler<RemarkDeleted>,
+        IEventHandler<RemarkDeleted>, IEventHandler<RemarkResolved>, 
+        IEventHandler<RemarkProcessed>, IEventHandler<RemarkRenewed>, 
+        IEventHandler<RemarkCanceled>, 
         IEventHandler<PhotosToRemarkAdded>, IEventHandler<AddPhotosToRemarkRejected>, 
         IEventHandler<PhotosFromRemarkRemoved>, IEventHandler<RemovePhotosFromRemarkRejected>, 
         IEventHandler<RemarkVoteSubmitted>, IEventHandler<SubmitRemarkVoteRejected>, 
@@ -29,6 +31,8 @@ namespace Collectively.Services.Operations.Handlers
         IEventHandler<MessageOnFacebookWallPosted>,
         IEventHandler<PostOnFacebookWallRejected>,
         IEventHandler<CreateRemarkRejected>, IEventHandler<ResolveRemarkRejected>,
+        IEventHandler<ProcessRemarkRejected>, IEventHandler<RenewRemarkRejected>,
+        IEventHandler<CancelRemarkRejected>,
         IEventHandler<DeleteRemarkRejected>
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
@@ -44,10 +48,19 @@ namespace Collectively.Services.Operations.Handlers
         public async Task HandleAsync(RemarkCreated @event)
             => await CompleteForAuthenticatedUserAsync(@event);
 
+        public async Task HandleAsync(RemarkDeleted @event)
+            => await CompleteForAuthenticatedUserAsync(@event);
+
         public async Task HandleAsync(RemarkResolved @event)
             => await CompleteForAuthenticatedUserAsync(@event);
 
-        public async Task HandleAsync(RemarkDeleted @event)
+        public async Task HandleAsync(RemarkProcessed @event)
+            => await CompleteForAuthenticatedUserAsync(@event);
+
+        public async Task HandleAsync(RemarkRenewed @event)
+            => await CompleteForAuthenticatedUserAsync(@event);
+
+        public async Task HandleAsync(RemarkCanceled @event)
             => await CompleteForAuthenticatedUserAsync(@event);
 
         public async Task HandleAsync(PhotosToRemarkAdded @event)
@@ -134,6 +147,15 @@ namespace Collectively.Services.Operations.Handlers
         public async Task HandleAsync(ResolveRemarkRejected @event)
             => await RejectAsync(@event);
 
+        public async Task HandleAsync(ProcessRemarkRejected @event)
+            => await RejectAsync(@event);
+
+        public async Task HandleAsync(RenewRemarkRejected @event)
+            => await RejectAsync(@event);
+
+        public async Task HandleAsync(CancelRemarkRejected @event)
+            => await RejectAsync(@event);       
+                 
         public async Task HandleAsync(DeleteRemarkRejected @event)
             => await RejectAsync(@event);
 

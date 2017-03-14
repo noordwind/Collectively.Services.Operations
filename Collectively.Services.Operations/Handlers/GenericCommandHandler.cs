@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Collectively.Messages.Commands;
 using Collectively.Services.Operations.Domain;
 using Collectively.Services.Operations.Services;
@@ -12,7 +11,9 @@ using RawRabbit;
 namespace Collectively.Services.Operations.Handlers
 {
     public class GenericCommandHandler : ICommandHandler<CreateRemark>,
-        ICommandHandler<ResolveRemark>, ICommandHandler<DeleteRemark>,
+        ICommandHandler<DeleteRemark>,
+        ICommandHandler<ResolveRemark>, ICommandHandler<ProcessRemark>, 
+        ICommandHandler<RenewRemark>, ICommandHandler<CancelRemark>,
         ICommandHandler<AddPhotosToRemark>, ICommandHandler<RemovePhotosFromRemark>, 
         ICommandHandler<SubmitRemarkVote>, ICommandHandler<DeleteRemarkVote>,
         ICommandHandler<ChangeAvatar>, ICommandHandler<ChangeUsername>,
@@ -34,10 +35,19 @@ namespace Collectively.Services.Operations.Handlers
         public async Task HandleAsync(CreateRemark command)
             => await CreateForAuthenticatedUserAsync(command);
 
+        public async Task HandleAsync(DeleteRemark command)
+            => await CreateForAuthenticatedUserAsync(command);
+
         public async Task HandleAsync(ResolveRemark command)
             => await CreateForAuthenticatedUserAsync(command);
 
-        public async Task HandleAsync(DeleteRemark command)
+        public async Task HandleAsync(ProcessRemark command)
+            => await CreateForAuthenticatedUserAsync(command);
+
+        public async Task HandleAsync(RenewRemark command)
+            => await CreateForAuthenticatedUserAsync(command);
+
+        public async Task HandleAsync(CancelRemark command)
             => await CreateForAuthenticatedUserAsync(command);
 
         public async Task HandleAsync(AddPhotosToRemark command)
