@@ -19,10 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../../Collectively.Common/Collectively.Common/Collectively.Common.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="Collectively.Common" Version="1.0.*" />
     <PackageReference Include="Collectively.Messages" Version="1.0.*" />
     <PackageReference Include="Humanizer.Core" Version="2.1.0" />
     <PackageReference Include="Lockbox.Client" Version="1.0.0" />
