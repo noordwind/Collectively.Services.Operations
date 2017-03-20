@@ -20,7 +20,8 @@ namespace Collectively.Services.Operations.Handlers
         IEventHandler<PhotosFromRemarkRemoved>, IEventHandler<RemovePhotosFromRemarkRejected>, 
         IEventHandler<RemarkVoteSubmitted>, IEventHandler<SubmitRemarkVoteRejected>, 
         IEventHandler<RemarkVoteDeleted>, IEventHandler<DeleteRemarkVoteRejected>, 
-        IEventHandler<AvatarChanged>, IEventHandler<ChangeAvatarRejected>, 
+        IEventHandler<AvatarUploaded>, IEventHandler<UploadAvatarRejected>,
+        IEventHandler<AvatarRemoved>, IEventHandler<RemoveAvatarRejected>,  
         IEventHandler<UsernameChanged>, IEventHandler<ChangeUsernameRejected>,
         IEventHandler<ResetPasswordInitiated>, IEventHandler<NewPasswordSet>,
         IEventHandler<ResetPasswordRejected>, IEventHandler<SetNewPasswordRejected>,
@@ -87,12 +88,17 @@ namespace Collectively.Services.Operations.Handlers
         public async Task HandleAsync(DeleteRemarkVoteRejected @event)
             => await RejectAsync(@event);
 
-        public async Task HandleAsync(AvatarChanged @event)
+        public async Task HandleAsync(AvatarUploaded @event)
             => await CompleteForAuthenticatedUserAsync(@event);
 
-        public async Task HandleAsync(ChangeAvatarRejected @event)
+        public async Task HandleAsync(UploadAvatarRejected @event)
             => await RejectAsync(@event);
 
+        public async Task HandleAsync(AvatarRemoved @event)
+            => await CompleteForAuthenticatedUserAsync(@event);
+
+        public async Task HandleAsync(RemoveAvatarRejected @event)
+            => await RejectAsync(@event);
         public async Task HandleAsync(UsernameChanged @event)
             => await CompleteForAuthenticatedUserAsync(@event);
 

@@ -16,7 +16,8 @@ namespace Collectively.Services.Operations.Handlers
         ICommandHandler<RenewRemark>, ICommandHandler<CancelRemark>,
         ICommandHandler<AddPhotosToRemark>, ICommandHandler<RemovePhotosFromRemark>, 
         ICommandHandler<SubmitRemarkVote>, ICommandHandler<DeleteRemarkVote>,
-        ICommandHandler<ChangeAvatar>, ICommandHandler<ChangeUsername>,
+        ICommandHandler<UploadAvatar>, ICommandHandler<RemoveAvatar>, 
+        ICommandHandler<ChangeUsername>,
         ICommandHandler<ResetPassword>, ICommandHandler<SetNewPassword>,
         ICommandHandler<ChangePassword>, ICommandHandler<EditUser>,
         ICommandHandler<SignIn>, ICommandHandler<SignUp>,
@@ -52,19 +53,17 @@ namespace Collectively.Services.Operations.Handlers
 
         public async Task HandleAsync(AddPhotosToRemark command)
             => await CreateForAuthenticatedUserAsync(command);
-
         public async Task HandleAsync(RemovePhotosFromRemark command)
             => await CreateForAuthenticatedUserAsync(command);
-
         public async Task HandleAsync(SubmitRemarkVote command)
             => await CreateForAuthenticatedUserAsync(command);
 
         public async Task HandleAsync(DeleteRemarkVote command)
             => await CreateForAuthenticatedUserAsync(command);
-
-        public async Task HandleAsync(ChangeAvatar command)
+        public async Task HandleAsync(UploadAvatar command)
             => await CreateForAuthenticatedUserAsync(command);
-
+        public async Task HandleAsync(RemoveAvatar command)
+            => await CreateForAuthenticatedUserAsync(command);
         public async Task HandleAsync(ChangeUsername command)
             => await CreateForAuthenticatedUserAsync(command);
 
