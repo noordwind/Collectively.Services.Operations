@@ -20,6 +20,11 @@ namespace Collectively.Services.Operations.Handlers
         IEventHandler<PhotosFromRemarkRemoved>, IEventHandler<RemovePhotosFromRemarkRejected>, 
         IEventHandler<RemarkVoteSubmitted>, IEventHandler<SubmitRemarkVoteRejected>, 
         IEventHandler<RemarkVoteDeleted>, IEventHandler<DeleteRemarkVoteRejected>, 
+        IEventHandler<CommentAddedToRemark>, IEventHandler<AddCommentToRemarkRejected>, 
+        IEventHandler<CommentEditedInRemark>, IEventHandler<EditRemarkCommentRejected>, 
+        IEventHandler<CommentDeletedFromRemark>, IEventHandler<DeleteRemarkCommentRejected>, 
+        IEventHandler<RemarkCommentVoteSubmitted>, IEventHandler<SubmitRemarkCommentVoteRejected>, 
+        IEventHandler<RemarkCommentVoteDeleted>, IEventHandler<DeleteRemarkCommentVoteRejected>, 
         IEventHandler<AvatarUploaded>, IEventHandler<UploadAvatarRejected>,
         IEventHandler<AvatarRemoved>, IEventHandler<RemoveAvatarRejected>,  
         IEventHandler<UsernameChanged>, IEventHandler<ChangeUsernameRejected>,
@@ -88,6 +93,26 @@ namespace Collectively.Services.Operations.Handlers
         public async Task HandleAsync(DeleteRemarkVoteRejected @event)
             => await RejectAsync(@event);
 
+        public async Task HandleAsync(CommentAddedToRemark @event)
+            => await CompleteForAuthenticatedUserAsync(@event);
+        public async Task HandleAsync(AddCommentToRemarkRejected @event)
+            => await CompleteForAuthenticatedUserAsync(@event);
+        public async Task HandleAsync(CommentEditedInRemark @event)
+            => await CompleteForAuthenticatedUserAsync(@event);
+        public async Task HandleAsync(EditRemarkCommentRejected @event)
+            => await CompleteForAuthenticatedUserAsync(@event);
+        public async Task HandleAsync(CommentDeletedFromRemark @event)
+            => await CompleteForAuthenticatedUserAsync(@event);                
+        public async Task HandleAsync(DeleteRemarkCommentRejected @event)
+            => await CompleteForAuthenticatedUserAsync(@event);
+        public async Task HandleAsync(RemarkCommentVoteSubmitted @event)
+            => await CompleteForAuthenticatedUserAsync(@event);
+        public async Task HandleAsync(SubmitRemarkCommentVoteRejected @event)
+            => await CompleteForAuthenticatedUserAsync(@event);
+        public async Task HandleAsync(RemarkCommentVoteDeleted @event)
+            => await CompleteForAuthenticatedUserAsync(@event);
+        public async Task HandleAsync(DeleteRemarkCommentVoteRejected @event)
+            => await CompleteForAuthenticatedUserAsync(@event);
         public async Task HandleAsync(AvatarUploaded @event)
             => await CompleteForAuthenticatedUserAsync(@event);
 

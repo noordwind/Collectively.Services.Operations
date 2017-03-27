@@ -16,6 +16,9 @@ namespace Collectively.Services.Operations.Handlers
         ICommandHandler<RenewRemark>, ICommandHandler<CancelRemark>,
         ICommandHandler<AddPhotosToRemark>, ICommandHandler<RemovePhotosFromRemark>, 
         ICommandHandler<SubmitRemarkVote>, ICommandHandler<DeleteRemarkVote>,
+        ICommandHandler<AddCommentToRemark>, ICommandHandler<EditRemarkComment>,
+        ICommandHandler<DeleteRemarkComment>, ICommandHandler<SubmitRemarkCommentVote>,
+        ICommandHandler<DeleteRemarkCommentVote>, 
         ICommandHandler<UploadAvatar>, ICommandHandler<RemoveAvatar>, 
         ICommandHandler<ChangeUsername>,
         ICommandHandler<ResetPassword>, ICommandHandler<SetNewPassword>,
@@ -35,30 +38,33 @@ namespace Collectively.Services.Operations.Handlers
 
         public async Task HandleAsync(CreateRemark command)
             => await CreateForAuthenticatedUserAsync(command);
-
         public async Task HandleAsync(DeleteRemark command)
             => await CreateForAuthenticatedUserAsync(command);
-
         public async Task HandleAsync(ResolveRemark command)
             => await CreateForAuthenticatedUserAsync(command);
-
         public async Task HandleAsync(ProcessRemark command)
             => await CreateForAuthenticatedUserAsync(command);
-
         public async Task HandleAsync(RenewRemark command)
             => await CreateForAuthenticatedUserAsync(command);
-
         public async Task HandleAsync(CancelRemark command)
             => await CreateForAuthenticatedUserAsync(command);
-
         public async Task HandleAsync(AddPhotosToRemark command)
             => await CreateForAuthenticatedUserAsync(command);
         public async Task HandleAsync(RemovePhotosFromRemark command)
             => await CreateForAuthenticatedUserAsync(command);
         public async Task HandleAsync(SubmitRemarkVote command)
             => await CreateForAuthenticatedUserAsync(command);
-
         public async Task HandleAsync(DeleteRemarkVote command)
+            => await CreateForAuthenticatedUserAsync(command);
+        public async Task HandleAsync(AddCommentToRemark command)
+            => await CreateForAuthenticatedUserAsync(command);
+        public async Task HandleAsync(EditRemarkComment command)
+            => await CreateForAuthenticatedUserAsync(command);
+        public async Task HandleAsync(DeleteRemarkComment command)
+            => await CreateForAuthenticatedUserAsync(command);
+        public async Task HandleAsync(SubmitRemarkCommentVote command)
+            => await CreateForAuthenticatedUserAsync(command);
+        public async Task HandleAsync(DeleteRemarkCommentVote command)
             => await CreateForAuthenticatedUserAsync(command);
         public async Task HandleAsync(UploadAvatar command)
             => await CreateForAuthenticatedUserAsync(command);
@@ -66,31 +72,22 @@ namespace Collectively.Services.Operations.Handlers
             => await CreateForAuthenticatedUserAsync(command);
         public async Task HandleAsync(ChangeUsername command)
             => await CreateForAuthenticatedUserAsync(command);
-
         public async Task HandleAsync(ResetPassword command)
             => await CreateAsync(command);
-
         public async Task HandleAsync(SetNewPassword command)
             => await CreateAsync(command);
-
         public async Task HandleAsync(ChangePassword command)
             => await CreateForAuthenticatedUserAsync(command);
-
         public async Task HandleAsync(EditUser command)
             => await CreateForAuthenticatedUserAsync(command);
-
         public async Task HandleAsync(SignIn command)
             => await CreateAsync(command);
-
         public async Task HandleAsync(SignUp command)
             => await CreateAsync(command);
-
         public async Task HandleAsync(SignOut command)
             => await CreateForAuthenticatedUserAsync(command);
-
         public async Task HandleAsync(PostOnFacebookWall command)
             => await CreateForAuthenticatedUserAsync(command);
-
         private async Task CreateForAuthenticatedUserAsync(IAuthenticatedCommand command)
             => await CreateAsync(command, command.UserId);
 
