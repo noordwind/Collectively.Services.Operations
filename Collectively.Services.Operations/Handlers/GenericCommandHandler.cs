@@ -19,6 +19,7 @@ namespace Collectively.Services.Operations.Handlers
         ICommandHandler<AddCommentToRemark>, ICommandHandler<EditRemarkComment>,
         ICommandHandler<DeleteRemarkComment>, ICommandHandler<SubmitRemarkCommentVote>,
         ICommandHandler<DeleteRemarkCommentVote>, 
+        ICommandHandler<AddFavoriteRemark>, ICommandHandler<DeleteFavoriteRemark>,
         ICommandHandler<UploadAvatar>, ICommandHandler<RemoveAvatar>, 
         ICommandHandler<ChangeUsername>,
         ICommandHandler<ResetPassword>, ICommandHandler<SetNewPassword>,
@@ -65,6 +66,10 @@ namespace Collectively.Services.Operations.Handlers
         public async Task HandleAsync(SubmitRemarkCommentVote command)
             => await CreateForAuthenticatedUserAsync(command);
         public async Task HandleAsync(DeleteRemarkCommentVote command)
+            => await CreateForAuthenticatedUserAsync(command);
+        public async Task HandleAsync(AddFavoriteRemark command)
+            => await CreateForAuthenticatedUserAsync(command);
+        public async Task HandleAsync(DeleteFavoriteRemark command)
             => await CreateForAuthenticatedUserAsync(command);
         public async Task HandleAsync(UploadAvatar command)
             => await CreateForAuthenticatedUserAsync(command);
