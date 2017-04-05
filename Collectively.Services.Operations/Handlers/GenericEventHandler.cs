@@ -27,6 +27,8 @@ namespace Collectively.Services.Operations.Handlers
         IEventHandler<RemarkCommentVoteDeleted>, IEventHandler<DeleteRemarkCommentVoteRejected>, 
         IEventHandler<FavoriteRemarkAdded>, IEventHandler<AddFavoriteRemarkRejected>, 
         IEventHandler<FavoriteRemarkDeleted>, IEventHandler<DeleteFavoriteRemarkRejected>, 
+        IEventHandler<RemarkActionTaken>, IEventHandler<TakeRemarkActionRejected>, 
+        IEventHandler<RemarkActionCanceled>, IEventHandler<CancelRemarkActionRejected>, 
         IEventHandler<AvatarUploaded>, IEventHandler<UploadAvatarRejected>,
         IEventHandler<AvatarRemoved>, IEventHandler<RemoveAvatarRejected>,  
         IEventHandler<UsernameChanged>, IEventHandler<ChangeUsernameRejected>,
@@ -115,7 +117,14 @@ namespace Collectively.Services.Operations.Handlers
             => await CompleteForAuthenticatedUserAsync(@event);
         public async Task HandleAsync(DeleteRemarkCommentVoteRejected @event)
             => await CompleteForAuthenticatedUserAsync(@event);
-
+        public async Task HandleAsync(RemarkActionTaken @event)
+            => await CompleteForAuthenticatedUserAsync(@event);
+        public async Task HandleAsync(TakeRemarkActionRejected @event)
+            => await CompleteForAuthenticatedUserAsync(@event);            
+        public async Task HandleAsync(RemarkActionCanceled @event)
+            => await CompleteForAuthenticatedUserAsync(@event);
+        public async Task HandleAsync(CancelRemarkActionRejected @event)
+            => await CompleteForAuthenticatedUserAsync(@event);
         public async Task HandleAsync(FavoriteRemarkAdded @event)
             => await CompleteForAuthenticatedUserAsync(@event);
         public async Task HandleAsync(AddFavoriteRemarkRejected @event)
