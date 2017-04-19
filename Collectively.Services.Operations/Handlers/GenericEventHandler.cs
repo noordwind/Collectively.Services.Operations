@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Collectively.Messages.Events;
+using Collectively.Messages.Events.Notifications;
 using Collectively.Services.Operations.Domain;
 using Collectively.Services.Operations.Services;
 using Collectively.Messages.Events.Operations;
@@ -43,7 +44,8 @@ namespace Collectively.Services.Operations.Handlers
         IEventHandler<CreateRemarkRejected>, IEventHandler<ResolveRemarkRejected>,
         IEventHandler<ProcessRemarkRejected>, IEventHandler<RenewRemarkRejected>,
         IEventHandler<CancelRemarkRejected>,
-        IEventHandler<DeleteRemarkRejected>
+        IEventHandler<DeleteRemarkRejected>,
+        IEventHandler<UserNotificationSettingsUpdated>, IEventHandler<UpdateUserNotificationSettingsRejected>
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private readonly IBusClient _bus;
@@ -227,6 +229,12 @@ namespace Collectively.Services.Operations.Handlers
             => await RejectAsync(@event);       
                  
         public async Task HandleAsync(DeleteRemarkRejected @event)
+            => await RejectAsync(@event);
+
+        public async Task HandleAsync(UserNotificationSettingsUpdated @event)
+            => await CompleteAsync(@event);
+
+        public async Task HandleAsync(UpdateUserNotificationSettingsRejected @event)
             => await RejectAsync(@event);
 
         private async Task CompleteForAuthenticatedUserAsync(IAuthenticatedEvent @event)

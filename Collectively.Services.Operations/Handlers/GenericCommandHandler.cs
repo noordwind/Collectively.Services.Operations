@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Collectively.Messages.Commands;
+using Collectively.Messages.Commands.Notifications;
 using Collectively.Services.Operations.Domain;
 using Collectively.Services.Operations.Services;
 using Collectively.Messages.Events.Operations;
@@ -26,7 +27,8 @@ namespace Collectively.Services.Operations.Handlers
         ICommandHandler<ResetPassword>, ICommandHandler<SetNewPassword>,
         ICommandHandler<ChangePassword>, ICommandHandler<EditUser>,
         ICommandHandler<SignIn>, ICommandHandler<SignUp>,
-        ICommandHandler<SignOut>, ICommandHandler<PostOnFacebookWall>
+        ICommandHandler<SignOut>, ICommandHandler<PostOnFacebookWall>,
+        ICommandHandler<UpdateUserNotificationSettings>
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private readonly IBusClient _bus;
@@ -97,6 +99,8 @@ namespace Collectively.Services.Operations.Handlers
         public async Task HandleAsync(SignOut command)
             => await CreateForAuthenticatedUserAsync(command);
         public async Task HandleAsync(PostOnFacebookWall command)
+            => await CreateForAuthenticatedUserAsync(command);
+        public async Task HandleAsync(UpdateUserNotificationSettings command)
             => await CreateForAuthenticatedUserAsync(command);
         private async Task CreateForAuthenticatedUserAsync(IAuthenticatedCommand command)
             => await CreateAsync(command, command.UserId);

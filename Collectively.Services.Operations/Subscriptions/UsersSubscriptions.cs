@@ -1,4 +1,6 @@
+using Collectively.Messages.Commands.Notifications;
 using Collectively.Messages.Commands.Users;
+using Collectively.Messages.Events.Notifications;
 using Collectively.Messages.Events.Users;
 using static Collectively.Common.Host.WebServiceHost;
 
@@ -21,7 +23,8 @@ namespace Collectively.Services.Operations.Subscriptions
                 .SubscribeToCommand<SignIn>()
                 .SubscribeToCommand<SignUp>()
                 .SubscribeToCommand<SignOut>()
-                .SubscribeToCommand<PostOnFacebookWall>();    
+                .SubscribeToCommand<PostOnFacebookWall>()
+                .SubscribeToCommand<UpdateUserNotificationSettings>();
 
         private static BusBuilder SubscribeEvents(this BusBuilder busBuilder)
             => busBuilder.SubscribeToEvent<UsernameChanged>()
@@ -29,7 +32,7 @@ namespace Collectively.Services.Operations.Subscriptions
                 .SubscribeToEvent<AvatarUploaded>()
                 .SubscribeToEvent<UploadAvatarRejected>()
                 .SubscribeToEvent<AvatarRemoved>()
-                .SubscribeToEvent<RemoveAvatarRejected>()                
+                .SubscribeToEvent<RemoveAvatarRejected>()
                 .SubscribeToEvent<PasswordChanged>()
                 .SubscribeToEvent<ResetPasswordInitiated>()
                 .SubscribeToEvent<NewPasswordSet>()
@@ -43,6 +46,8 @@ namespace Collectively.Services.Operations.Subscriptions
                 .SubscribeToEvent<SignUpRejected>()
                 .SubscribeToEvent<SignOutRejected>()
                 .SubscribeToEvent<MessageOnFacebookWallPosted>()
-                .SubscribeToEvent<PostOnFacebookWallRejected>();                
+                .SubscribeToEvent<PostOnFacebookWallRejected>()
+                .SubscribeToEvent<UserNotificationSettingsUpdated>()
+                .SubscribeToEvent<UpdateUserNotificationSettingsRejected>();
     }
 }
