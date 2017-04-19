@@ -99,40 +99,58 @@ namespace Collectively.Services.Operations.Handlers
 
         public async Task HandleAsync(CommentAddedToRemark @event)
             => await CompleteForAuthenticatedUserAsync(@event);
+
         public async Task HandleAsync(AddCommentToRemarkRejected @event)
-            => await CompleteForAuthenticatedUserAsync(@event);
+            => await RejectAsync(@event);
+
         public async Task HandleAsync(CommentEditedInRemark @event)
             => await CompleteForAuthenticatedUserAsync(@event);
+
         public async Task HandleAsync(EditRemarkCommentRejected @event)
-            => await CompleteForAuthenticatedUserAsync(@event);
+            => await RejectAsync(@event);
+
         public async Task HandleAsync(CommentDeletedFromRemark @event)
-            => await CompleteForAuthenticatedUserAsync(@event);                
+            => await CompleteForAuthenticatedUserAsync(@event);  
+
         public async Task HandleAsync(DeleteRemarkCommentRejected @event)
-            => await CompleteForAuthenticatedUserAsync(@event);
+            => await RejectAsync(@event);
+
         public async Task HandleAsync(RemarkCommentVoteSubmitted @event)
             => await CompleteForAuthenticatedUserAsync(@event);
+
         public async Task HandleAsync(SubmitRemarkCommentVoteRejected @event)
-            => await CompleteForAuthenticatedUserAsync(@event);
+            => await RejectAsync(@event);
+
         public async Task HandleAsync(RemarkCommentVoteDeleted @event)
             => await CompleteForAuthenticatedUserAsync(@event);
+
         public async Task HandleAsync(DeleteRemarkCommentVoteRejected @event)
-            => await CompleteForAuthenticatedUserAsync(@event);
+            => await RejectAsync(@event);
+
         public async Task HandleAsync(RemarkActionTaken @event)
             => await CompleteForAuthenticatedUserAsync(@event);
+
         public async Task HandleAsync(TakeRemarkActionRejected @event)
-            => await CompleteForAuthenticatedUserAsync(@event);            
+            => await RejectAsync(@event); 
+
         public async Task HandleAsync(RemarkActionCanceled @event)
             => await CompleteForAuthenticatedUserAsync(@event);
+
         public async Task HandleAsync(CancelRemarkActionRejected @event)
-            => await CompleteForAuthenticatedUserAsync(@event);
+            => await RejectAsync(@event);
+
         public async Task HandleAsync(FavoriteRemarkAdded @event)
             => await CompleteForAuthenticatedUserAsync(@event);
+
         public async Task HandleAsync(AddFavoriteRemarkRejected @event)
-            => await CompleteForAuthenticatedUserAsync(@event);
+            => await RejectAsync(@event);
+
         public async Task HandleAsync(FavoriteRemarkDeleted @event)
             => await CompleteForAuthenticatedUserAsync(@event);
+
         public async Task HandleAsync(DeleteFavoriteRemarkRejected @event)
-            => await CompleteForAuthenticatedUserAsync(@event);
+            => await RejectAsync(@event);
+
         public async Task HandleAsync(AvatarUploaded @event)
             => await CompleteForAuthenticatedUserAsync(@event);
 
@@ -144,6 +162,7 @@ namespace Collectively.Services.Operations.Handlers
 
         public async Task HandleAsync(RemoveAvatarRejected @event)
             => await RejectAsync(@event);
+            
         public async Task HandleAsync(UsernameChanged @event)
             => await CompleteForAuthenticatedUserAsync(@event);
 
