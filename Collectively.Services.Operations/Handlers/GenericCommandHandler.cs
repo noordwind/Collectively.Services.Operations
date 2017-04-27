@@ -28,7 +28,8 @@ namespace Collectively.Services.Operations.Handlers
         ICommandHandler<ChangePassword>, ICommandHandler<EditUser>,
         ICommandHandler<SignIn>, ICommandHandler<SignUp>,
         ICommandHandler<SignOut>, ICommandHandler<PostOnFacebookWall>,
-        ICommandHandler<UpdateUserNotificationSettings>
+        ICommandHandler<UpdateUserNotificationSettings>,
+        ICommandHandler<DeleteRemarkState>
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private readonly IBusClient _bus;
@@ -101,6 +102,8 @@ namespace Collectively.Services.Operations.Handlers
         public async Task HandleAsync(PostOnFacebookWall command)
             => await CreateForAuthenticatedUserAsync(command);
         public async Task HandleAsync(UpdateUserNotificationSettings command)
+            => await CreateForAuthenticatedUserAsync(command);
+        public async Task HandleAsync(DeleteRemarkState command)
             => await CreateForAuthenticatedUserAsync(command);
         private async Task CreateForAuthenticatedUserAsync(IAuthenticatedCommand command)
             => await CreateAsync(command, command.UserId);
