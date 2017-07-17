@@ -70,6 +70,5 @@ For the local testing purposes the *.local* or *.docker* configuration files are
 **Solution structure**
 ----------------
 - **Collectively.Services.Operations** - core and executable project via *dotnet run* command.
-- **Collectively.Services.Operations.Shared** - shared package containing events, commands, DTOs & operation codes.
 - **Collectively.Services.Operations.Tests** - unit & integration tests executable via *dotnet test* command.
 - **Collectively.Services.Operations.Tests.EndToEnd** - End-to-End tests executable via *dotnet test* command.
