@@ -12,6 +12,7 @@ namespace Collectively.Services.Operations
                 .Create<Startup>(args: args)
                 .UseAutofac(Bootstrapper.LifeTimeScope)
                 .UseRabbitMq(queueName: typeof(Program).Namespace)
+                .SubscribeGroups()
                 .SubscribeRemarks()
                 .SubscribeUsers()
                 .Build()

@@ -4,6 +4,7 @@ using Collectively.Messages.Events;
 using Collectively.Messages.Events.Notifications;
 using Collectively.Services.Operations.Domain;
 using Collectively.Services.Operations.Services;
+using Collectively.Messages.Events.Groups;
 using Collectively.Messages.Events.Operations;
 using Collectively.Messages.Events.Remarks;
 using Collectively.Messages.Events.Users;
@@ -39,14 +40,15 @@ namespace Collectively.Services.Operations.Handlers
         IEventHandler<SignedIn>, IEventHandler<SignedUp>,
         IEventHandler<SignedOut>, IEventHandler<SignOutRejected>, 
         IEventHandler<SignInRejected>, IEventHandler<SignUpRejected>, 
-        IEventHandler<MessageOnFacebookWallPosted>,
-        IEventHandler<PostOnFacebookWallRejected>,
+        IEventHandler<MessageOnFacebookWallPosted>,IEventHandler<PostOnFacebookWallRejected>,
+        IEventHandler<AccountDeleted>, IEventHandler<DeleteAccountRejected>,
         IEventHandler<CreateRemarkRejected>, IEventHandler<ResolveRemarkRejected>,
         IEventHandler<ProcessRemarkRejected>, IEventHandler<RenewRemarkRejected>,
-        IEventHandler<CancelRemarkRejected>,
-        IEventHandler<DeleteRemarkRejected>,
+        IEventHandler<CancelRemarkRejected>, IEventHandler<DeleteRemarkRejected>,
         IEventHandler<UserNotificationSettingsUpdated>, IEventHandler<UpdateUserNotificationSettingsRejected>,
-        IEventHandler<RemarkStateDeleted>, IEventHandler<DeleteRemarkStateRejected>
+        IEventHandler<RemarkStateDeleted>, IEventHandler<DeleteRemarkStateRejected>,
+        IEventHandler<GroupCreated>, IEventHandler<CreateGroupRejected>,
+        IEventHandler<OrganizationCreated>, IEventHandler<CreateOrganizationRejected>
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private readonly IBusClient _bus;
@@ -202,6 +204,9 @@ namespace Collectively.Services.Operations.Handlers
         public async Task HandleAsync(MessageOnFacebookWallPosted @event)
             => await CompleteForAuthenticatedUserAsync(@event);
 
+        public async Task HandleAsync(AccountDeleted @event)
+            => await CompleteForAuthenticatedUserAsync(@event);
+
         public async Task HandleAsync(ChangePasswordRejected @event)
             => await RejectAsync(@event);
 
@@ -212,6 +217,9 @@ namespace Collectively.Services.Operations.Handlers
             => await RejectAsync(@event);
 
         public async Task HandleAsync(PostOnFacebookWallRejected @event)
+            => await RejectAsync(@event);
+
+        public async Task HandleAsync(DeleteAccountRejected @event)
             => await RejectAsync(@event);
 
         public async Task HandleAsync(CreateRemarkRejected @event)
@@ -243,6 +251,19 @@ namespace Collectively.Services.Operations.Handlers
 
         public async Task HandleAsync(DeleteRemarkStateRejected @event)
             => await RejectAsync(@event);
+
+        public async Task HandleAsync(GroupCreated @event)
+            => await CompleteForAuthenticatedUserAsync(@event);
+
+        public async Task HandleAsync(CreateGroupRejected @event)
+            => await RejectAsync(@event);
+
+        public async Task HandleAsync(OrganizationCreated @event)
+            => await CompleteForAuthenticatedUserAsync(@event);
+
+        public async Task HandleAsync(CreateOrganizationRejected @event)
+            => await RejectAsync(@event);
+              
 
         private async Task CompleteForAuthenticatedUserAsync(IAuthenticatedEvent @event)
             => await CompleteAsync(@event, @event.UserId);

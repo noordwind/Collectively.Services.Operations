@@ -4,6 +4,7 @@ using Collectively.Messages.Commands.Notifications;
 using Collectively.Services.Operations.Domain;
 using Collectively.Services.Operations.Services;
 using Collectively.Messages.Events.Operations;
+using Collectively.Messages.Commands.Groups;
 using Collectively.Messages.Commands.Remarks;
 using Collectively.Messages.Commands.Users;
 using NLog;
@@ -28,8 +29,10 @@ namespace Collectively.Services.Operations.Handlers
         ICommandHandler<ChangePassword>, ICommandHandler<EditUser>,
         ICommandHandler<SignIn>, ICommandHandler<SignUp>,
         ICommandHandler<SignOut>, ICommandHandler<PostOnFacebookWall>,
+        ICommandHandler<DeleteAccount>,
         ICommandHandler<UpdateUserNotificationSettings>,
-        ICommandHandler<DeleteRemarkState>
+        ICommandHandler<DeleteRemarkState>,
+        ICommandHandler<CreateGroup>, ICommandHandler<CreateOrganization>
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private readonly IBusClient _bus;
@@ -101,10 +104,20 @@ namespace Collectively.Services.Operations.Handlers
             => await CreateForAuthenticatedUserAsync(command);
         public async Task HandleAsync(PostOnFacebookWall command)
             => await CreateForAuthenticatedUserAsync(command);
+
+        public async Task HandleAsync(DeleteAccount command)
+            => await CreateForAuthenticatedUserAsync(command);
         public async Task HandleAsync(UpdateUserNotificationSettings command)
             => await CreateForAuthenticatedUserAsync(command);
         public async Task HandleAsync(DeleteRemarkState command)
             => await CreateForAuthenticatedUserAsync(command);
+
+        public async Task HandleAsync(CreateGroup command)
+            => await CreateForAuthenticatedUserAsync(command);
+
+        public async Task HandleAsync(CreateOrganization command)
+            => await CreateForAuthenticatedUserAsync(command);
+
         private async Task CreateForAuthenticatedUserAsync(IAuthenticatedCommand command)
             => await CreateAsync(command, command.UserId);
 
