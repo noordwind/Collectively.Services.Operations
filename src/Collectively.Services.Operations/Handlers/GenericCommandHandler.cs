@@ -32,7 +32,8 @@ namespace Collectively.Services.Operations.Handlers
         ICommandHandler<DeleteAccount>,
         ICommandHandler<UpdateUserNotificationSettings>,
         ICommandHandler<DeleteRemarkState>,
-        ICommandHandler<CreateGroup>, ICommandHandler<CreateOrganization>
+        ICommandHandler<CreateGroup>, ICommandHandler<CreateOrganization>,
+        ICommandHandler<ActivateAccount>
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private readonly IBusClient _bus;
@@ -117,6 +118,9 @@ namespace Collectively.Services.Operations.Handlers
 
         public async Task HandleAsync(CreateOrganization command)
             => await CreateForAuthenticatedUserAsync(command);
+
+        public async Task HandleAsync(ActivateAccount command)
+            => await CreateAsync(command);
 
         private async Task CreateForAuthenticatedUserAsync(IAuthenticatedCommand command)
             => await CreateAsync(command, command.UserId);
