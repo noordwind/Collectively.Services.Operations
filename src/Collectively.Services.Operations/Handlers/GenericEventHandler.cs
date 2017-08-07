@@ -50,7 +50,9 @@ namespace Collectively.Services.Operations.Handlers
         IEventHandler<GroupCreated>, IEventHandler<CreateGroupRejected>,
         IEventHandler<OrganizationCreated>, IEventHandler<CreateOrganizationRejected>,
         IEventHandler<ActivateAccountInitiated>, IEventHandler<AccountActivated>,
-        IEventHandler<ActivateAccountRejected>
+        IEventHandler<ActivateAccountRejected>,
+        IEventHandler<AccountLocked>, IEventHandler<LockAccountRejected>,
+        IEventHandler<AccountUnlocked>, IEventHandler<UnlockAccountRejected>
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private readonly IBusClient _bus;
@@ -273,6 +275,18 @@ namespace Collectively.Services.Operations.Handlers
             => await CompleteAsync(@event, @event.UserId);
 
         public async Task HandleAsync(ActivateAccountRejected @event)
+            => await RejectAsync(@event);
+
+        public async Task HandleAsync(AccountLocked @event)
+            => await CompleteAsync(@event, @event.UserId);
+
+        public async Task HandleAsync(LockAccountRejected @event)
+            => await RejectAsync(@event);
+
+        public async Task HandleAsync(AccountUnlocked @event)
+            => await CompleteAsync(@event, @event.UserId);
+
+        public async Task HandleAsync(UnlockAccountRejected @event)
             => await RejectAsync(@event);
 
         private async Task CompleteForAuthenticatedUserAsync(IAuthenticatedEvent @event)

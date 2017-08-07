@@ -26,7 +26,9 @@ namespace Collectively.Services.Operations.Subscriptions
                 .SubscribeToCommand<PostOnFacebookWall>()
                 .SubscribeToCommand<UpdateUserNotificationSettings>()
                 .SubscribeToCommand<DeleteAccount>()
-                .SubscribeToCommand<ActivateAccount>();
+                .SubscribeToCommand<ActivateAccount>()
+                .SubscribeToCommand<LockAccount>()
+                .SubscribeToCommand<UnlockAccount>();
 
         private static BusBuilder SubscribeEvents(this BusBuilder busBuilder)
             => busBuilder.SubscribeToEvent<UsernameChanged>()
@@ -55,6 +57,10 @@ namespace Collectively.Services.Operations.Subscriptions
                 .SubscribeToEvent<DeleteAccountRejected>()
                 .SubscribeToEvent<ActivateAccountInitiated>()
                 .SubscribeToEvent<AccountActivated>()
-                .SubscribeToEvent<ActivateAccountRejected>();
+                .SubscribeToEvent<ActivateAccountRejected>()
+                .SubscribeToEvent<AccountLocked>()
+                .SubscribeToEvent<LockAccountRejected>()
+                .SubscribeToEvent<AccountUnlocked>()
+                .SubscribeToEvent<UnlockAccountRejected>();
     }
 }
