@@ -32,9 +32,10 @@ namespace Collectively.Services.Operations.Handlers
         ICommandHandler<DeleteAccount>,
         ICommandHandler<UpdateUserNotificationSettings>,
         ICommandHandler<DeleteRemarkState>,
-        ICommandHandler<CreateGroup>, ICommandHandler<CreateOrganization>,
         ICommandHandler<ActivateAccount>,
-        ICommandHandler<LockAccount>, ICommandHandler<UnlockAccount>
+        ICommandHandler<LockAccount>, ICommandHandler<UnlockAccount>,
+        ICommandHandler<CreateGroup>, ICommandHandler<CreateOrganization>,
+        ICommandHandler<AddMemberToGroup>, ICommandHandler<AddMemberToOrganization>
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private readonly IBusClient _bus;
@@ -114,12 +115,6 @@ namespace Collectively.Services.Operations.Handlers
         public async Task HandleAsync(DeleteRemarkState command)
             => await CreateForAuthenticatedUserAsync(command);
 
-        public async Task HandleAsync(CreateGroup command)
-            => await CreateForAuthenticatedUserAsync(command);
-
-        public async Task HandleAsync(CreateOrganization command)
-            => await CreateForAuthenticatedUserAsync(command);
-
         public async Task HandleAsync(ActivateAccount command)
             => await CreateAsync(command);
 
@@ -127,6 +122,18 @@ namespace Collectively.Services.Operations.Handlers
             => await CreateForAuthenticatedUserAsync(command);
 
         public async Task HandleAsync(UnlockAccount command)
+            => await CreateForAuthenticatedUserAsync(command);
+
+        public async Task HandleAsync(CreateGroup command)
+            => await CreateForAuthenticatedUserAsync(command);
+
+        public async Task HandleAsync(CreateOrganization command)
+            => await CreateForAuthenticatedUserAsync(command);
+
+        public async Task HandleAsync(AddMemberToGroup command)
+            => await CreateForAuthenticatedUserAsync(command);
+
+        public async Task HandleAsync(AddMemberToOrganization command)
             => await CreateForAuthenticatedUserAsync(command);
 
         private async Task CreateForAuthenticatedUserAsync(IAuthenticatedCommand command)

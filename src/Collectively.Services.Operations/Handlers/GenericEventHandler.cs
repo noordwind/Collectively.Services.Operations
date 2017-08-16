@@ -47,12 +47,14 @@ namespace Collectively.Services.Operations.Handlers
         IEventHandler<CancelRemarkRejected>, IEventHandler<DeleteRemarkRejected>,
         IEventHandler<UserNotificationSettingsUpdated>, IEventHandler<UpdateUserNotificationSettingsRejected>,
         IEventHandler<RemarkStateDeleted>, IEventHandler<DeleteRemarkStateRejected>,
-        IEventHandler<GroupCreated>, IEventHandler<CreateGroupRejected>,
-        IEventHandler<OrganizationCreated>, IEventHandler<CreateOrganizationRejected>,
         IEventHandler<ActivateAccountInitiated>, IEventHandler<AccountActivated>,
         IEventHandler<ActivateAccountRejected>,
         IEventHandler<AccountLocked>, IEventHandler<LockAccountRejected>,
-        IEventHandler<AccountUnlocked>, IEventHandler<UnlockAccountRejected>
+        IEventHandler<AccountUnlocked>, IEventHandler<UnlockAccountRejected>,
+        IEventHandler<GroupCreated>, IEventHandler<CreateGroupRejected>,
+        IEventHandler<OrganizationCreated>, IEventHandler<CreateOrganizationRejected>,
+        IEventHandler<MemberAddedToGroup>, IEventHandler<AddMemberToGroupRejected>,
+        IEventHandler<MemberAddedToOrganization>, IEventHandler<AddMemberToOrganizationRejected>
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private readonly IBusClient _bus;
@@ -256,18 +258,6 @@ namespace Collectively.Services.Operations.Handlers
         public async Task HandleAsync(DeleteRemarkStateRejected @event)
             => await RejectAsync(@event);
 
-        public async Task HandleAsync(GroupCreated @event)
-            => await CompleteForAuthenticatedUserAsync(@event);
-
-        public async Task HandleAsync(CreateGroupRejected @event)
-            => await RejectAsync(@event);
-
-        public async Task HandleAsync(OrganizationCreated @event)
-            => await CompleteForAuthenticatedUserAsync(@event);
-
-        public async Task HandleAsync(CreateOrganizationRejected @event)
-            => await RejectAsync(@event);
-
         public async Task HandleAsync(ActivateAccountInitiated @event)
             => await CompleteAsync(@event);
 
@@ -287,6 +277,30 @@ namespace Collectively.Services.Operations.Handlers
             => await CompleteAsync(@event, @event.UserId);
 
         public async Task HandleAsync(UnlockAccountRejected @event)
+            => await RejectAsync(@event);
+
+        public async Task HandleAsync(GroupCreated @event)
+            => await CompleteForAuthenticatedUserAsync(@event);
+
+        public async Task HandleAsync(CreateGroupRejected @event)
+            => await RejectAsync(@event);
+
+        public async Task HandleAsync(OrganizationCreated @event)
+            => await CompleteForAuthenticatedUserAsync(@event);
+
+        public async Task HandleAsync(CreateOrganizationRejected @event)
+            => await RejectAsync(@event);
+
+        public async Task HandleAsync(MemberAddedToGroup @event)
+            => await CompleteForAuthenticatedUserAsync(@event);
+
+        public async Task HandleAsync(AddMemberToGroupRejected @event)
+            => await RejectAsync(@event);
+
+        public async Task HandleAsync(MemberAddedToOrganization @event)
+            => await CompleteForAuthenticatedUserAsync(@event);
+
+        public async Task HandleAsync(AddMemberToOrganizationRejected @event)
             => await RejectAsync(@event);
 
         private async Task CompleteForAuthenticatedUserAsync(IAuthenticatedEvent @event)

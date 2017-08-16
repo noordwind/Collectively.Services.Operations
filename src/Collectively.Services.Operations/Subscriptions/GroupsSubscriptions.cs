@@ -12,12 +12,18 @@ namespace Collectively.Services.Operations.Subscriptions
 
         private static BusBuilder SubscribeCommands(this BusBuilder busBuilder)
             => busBuilder.SubscribeToCommand<CreateGroup>()
-                .SubscribeToCommand<CreateOrganization>();
+                .SubscribeToCommand<CreateOrganization>()
+                .SubscribeToCommand<AddMemberToGroup>()
+                .SubscribeToCommand<AddMemberToOrganization>();
 
         private static BusBuilder SubscribeEvents(this BusBuilder busBuilder)
             => busBuilder.SubscribeToEvent<GroupCreated>()
                 .SubscribeToEvent<CreateGroupRejected>()
                 .SubscribeToEvent<OrganizationCreated>()
-                .SubscribeToEvent<CreateOrganizationRejected>();
+                .SubscribeToEvent<CreateOrganizationRejected>()
+                .SubscribeToEvent<MemberAddedToGroup>()
+                .SubscribeToEvent<AddMemberToGroupRejected>()
+                .SubscribeToEvent<MemberAddedToOrganization>()
+                .SubscribeToEvent<AddMemberToOrganizationRejected>();
     }
 }
