@@ -35,7 +35,8 @@ namespace Collectively.Services.Operations.Handlers
         ICommandHandler<ActivateAccount>,
         ICommandHandler<LockAccount>, ICommandHandler<UnlockAccount>,
         ICommandHandler<CreateGroup>, ICommandHandler<CreateOrganization>,
-        ICommandHandler<AddMemberToGroup>, ICommandHandler<AddMemberToOrganization>
+        ICommandHandler<AddMemberToGroup>, ICommandHandler<AddMemberToOrganization>,
+        ICommandHandler<ReportRemark>
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private readonly IBusClient _bus;
@@ -136,6 +137,8 @@ namespace Collectively.Services.Operations.Handlers
         public async Task HandleAsync(AddMemberToOrganization command)
             => await CreateForAuthenticatedUserAsync(command);
 
+        public async Task HandleAsync(ReportRemark command)
+            => await CreateForAuthenticatedUserAsync(command);
         private async Task CreateForAuthenticatedUserAsync(IAuthenticatedCommand command)
             => await CreateAsync(command, command.UserId);
 

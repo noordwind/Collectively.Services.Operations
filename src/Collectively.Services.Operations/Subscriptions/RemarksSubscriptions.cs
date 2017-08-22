@@ -30,7 +30,8 @@ namespace Collectively.Services.Operations.Subscriptions
                 .SubscribeToCommand<DeleteFavoriteRemark>()
                 .SubscribeToCommand<TakeRemarkAction>()
                 .SubscribeToCommand<CancelRemarkAction>()
-                .SubscribeToCommand<DeleteRemarkState>();
+                .SubscribeToCommand<DeleteRemarkState>()
+                .SubscribeToCommand<ReportRemark>();
 
         private static BusBuilder SubscribeEvents(this BusBuilder busBuilder)
             => busBuilder.SubscribeToEvent<RemarkCreated>()
@@ -72,6 +73,8 @@ namespace Collectively.Services.Operations.Subscriptions
                 .SubscribeToEvent<RemarkActionCanceled>()
                 .SubscribeToEvent<CancelRemarkActionRejected>()
                 .SubscribeToEvent<RemarkStateDeleted>()
-                .SubscribeToEvent<DeleteRemarkStateRejected>();
+                .SubscribeToEvent<DeleteRemarkStateRejected>()
+                .SubscribeToEvent<RemarkReported>()
+                .SubscribeToEvent<ReportRemarkRejected>();
     }
 }
