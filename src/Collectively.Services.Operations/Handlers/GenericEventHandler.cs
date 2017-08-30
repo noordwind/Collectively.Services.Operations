@@ -9,7 +9,7 @@ using Collectively.Messages.Events.Operations;
 using Collectively.Messages.Events.Remarks;
 using Collectively.Messages.Events.Users;
 using Humanizer;
-using NLog;
+using Serilog;
 using RawRabbit;
 
 namespace Collectively.Services.Operations.Handlers
@@ -57,7 +57,7 @@ namespace Collectively.Services.Operations.Handlers
         IEventHandler<MemberAddedToOrganization>, IEventHandler<AddMemberToOrganizationRejected>,
         IEventHandler<RemarkReported>, IEventHandler<ReportRemarkRejected>
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        private static readonly ILogger Logger = Log.Logger;
         private readonly IBusClient _bus;
         private readonly IOperationService _operationService;
 

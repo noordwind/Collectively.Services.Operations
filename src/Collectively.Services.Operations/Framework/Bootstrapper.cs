@@ -16,14 +16,14 @@ using Microsoft.Extensions.Configuration;
 using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Autofac;
-using NLog;
+using Serilog;
 using RawRabbit.Configuration;
 
 namespace Collectively.Services.Operations.Framework
 {
     public class Bootstrapper : AutofacNancyBootstrapper
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        private static readonly ILogger Logger = Log.Logger;
         private static IExceptionHandler _exceptionHandler;
         private readonly IConfiguration _configuration;
 
@@ -36,7 +36,7 @@ namespace Collectively.Services.Operations.Framework
 
         protected override void ConfigureApplicationContainer(ILifetimeScope container)
         {
-            Logger.Info("Collectively.Services.Storage Configuring application container");
+            Logger.Information("Collectively.Services.Storage Configuring application container");
             base.ConfigureApplicationContainer(container);
 
             container.Update(builder =>
@@ -87,7 +87,7 @@ namespace Collectively.Services.Operations.Framework
             };
             pipelines.SetupTokenAuthentication(container);
             _exceptionHandler = container.Resolve<IExceptionHandler>();
-            Logger.Info("Collectively.Services.Operations API has started.");
+            Logger.Information("Collectively.Services.Operations API has started.");
         }
     }
 }

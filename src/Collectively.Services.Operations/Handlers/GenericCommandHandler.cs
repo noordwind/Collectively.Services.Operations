@@ -7,7 +7,7 @@ using Collectively.Messages.Events.Operations;
 using Collectively.Messages.Commands.Groups;
 using Collectively.Messages.Commands.Remarks;
 using Collectively.Messages.Commands.Users;
-using NLog;
+using Serilog;
 using RawRabbit;
 
 namespace Collectively.Services.Operations.Handlers
@@ -38,7 +38,7 @@ namespace Collectively.Services.Operations.Handlers
         ICommandHandler<AddMemberToGroup>, ICommandHandler<AddMemberToOrganization>,
         ICommandHandler<ReportRemark>
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        private static readonly ILogger Logger = Log.Logger;
         private readonly IBusClient _bus;
         private readonly IOperationService _operationService;
 
