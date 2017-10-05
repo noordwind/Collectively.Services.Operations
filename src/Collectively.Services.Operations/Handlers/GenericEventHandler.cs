@@ -55,7 +55,8 @@ namespace Collectively.Services.Operations.Handlers
         IEventHandler<OrganizationCreated>, IEventHandler<CreateOrganizationRejected>,
         IEventHandler<MemberAddedToGroup>, IEventHandler<AddMemberToGroupRejected>,
         IEventHandler<MemberAddedToOrganization>, IEventHandler<AddMemberToOrganizationRejected>,
-        IEventHandler<RemarkReported>, IEventHandler<ReportRemarkRejected>
+        IEventHandler<RemarkReported>, IEventHandler<ReportRemarkRejected>,
+        IEventHandler<RemarkEdited>, IEventHandler<EditRemarkRejected>
     {
         private static readonly ILogger Logger = Log.Logger;
         private readonly IBusClient _bus;
@@ -308,6 +309,12 @@ namespace Collectively.Services.Operations.Handlers
             => await CompleteForAuthenticatedUserAsync(@event);
 
         public async Task HandleAsync(ReportRemarkRejected @event)
+            => await RejectAsync(@event);
+
+        public async Task HandleAsync(RemarkEdited @event)
+            => await CompleteForAuthenticatedUserAsync(@event);
+
+        public async Task HandleAsync(EditRemarkRejected @event)
             => await RejectAsync(@event);
 
         private async Task CompleteForAuthenticatedUserAsync(IAuthenticatedEvent @event)
