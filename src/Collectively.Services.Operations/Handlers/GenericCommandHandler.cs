@@ -36,7 +36,8 @@ namespace Collectively.Services.Operations.Handlers
         ICommandHandler<LockAccount>, ICommandHandler<UnlockAccount>,
         ICommandHandler<CreateGroup>, ICommandHandler<CreateOrganization>,
         ICommandHandler<AddMemberToGroup>, ICommandHandler<AddMemberToOrganization>,
-        ICommandHandler<ReportRemark>, ICommandHandler<EditRemark>
+        ICommandHandler<ReportRemark>, ICommandHandler<EditRemark>,
+        ICommandHandler<AssignRemarkToGroup>
     {
         private static readonly ILogger Logger = Log.Logger;
         private readonly IBusClient _bus;
@@ -141,6 +142,9 @@ namespace Collectively.Services.Operations.Handlers
             => await CreateForAuthenticatedUserAsync(command);
 
         public async Task HandleAsync(EditRemark command)
+            => await CreateForAuthenticatedUserAsync(command);
+
+        public async Task HandleAsync(AssignRemarkToGroup command)
             => await CreateForAuthenticatedUserAsync(command);
         private async Task CreateForAuthenticatedUserAsync(IAuthenticatedCommand command)
             => await CreateAsync(command, command.UserId);
